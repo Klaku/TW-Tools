@@ -5,7 +5,7 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Linq;
 namespace CoreApi.Requests
 {
     public class VillageRequest
@@ -23,7 +23,7 @@ namespace CoreApi.Requests
             using (MonitoredScope scope = new MonitoredScope($"Miner.World[{world.SubDomain}].Fetch.Villages", _logger))
             {
                 List<string> rows = await Request.Fetch(world, "/map/village.txt", scope);
-                rows.ForEach(row =>
+                rows.Where(x => x != "").ToList().ForEach(row =>
                 {
                     try
                     {

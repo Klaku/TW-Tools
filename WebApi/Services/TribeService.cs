@@ -2,6 +2,8 @@
 using WebApi.Models;
 using CoreApi.Models.DB;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 namespace WebApi.Services
 {
     public class TribeService
@@ -13,18 +15,23 @@ namespace WebApi.Services
         }
         public List<dtoTribeModelMinimal> ListTribesByWorldId(int worldId)
         {
-            return _db.TribeCurrent.Where(x => x.WorldId == worldId).Select(tribe => new dtoTribeModelMinimal()
-            {
-                Id = tribe.Id,
-                Name = tribe.Name,
-                Tag = tribe.Tag,
-            }).ToList();
+            return _db.TribeCurrent
+                .Include(x => x.Tribe)
+                .Where(x => x.WorldId == worldId && x.Tribe.Active == true)
+                .Select(tribe => new dtoTribeModelMinimal()
+                {
+                    Id = tribe.Id,
+                    Name = tribe.Name,
+                    Tag = tribe.Tag,
+                })
+                .ToList();
         }
 
         public List<TribeCurrent> ListTribeData(int worldId, int skip, int top)
         {
             return _db.TribeCurrent
-                .Where(x => x.WorldId == worldId)
+                .Include(x => x.Tribe)
+                .Where(x => x.WorldId == worldId && x.Tribe.Active == true)
                 .OrderBy(x => x.Ranking)
                 .Skip(skip)
                 .Take(top)

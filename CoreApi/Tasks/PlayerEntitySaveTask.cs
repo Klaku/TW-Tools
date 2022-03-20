@@ -42,6 +42,7 @@ namespace CoreApi.Tasks
                             {
                                 Id = player.Id,
                                 Name = player.Name,
+                                Active=true,
                                 WorldId = _world.Id,
                             });
                             counter++;

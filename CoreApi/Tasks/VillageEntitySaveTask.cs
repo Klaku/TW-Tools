@@ -43,6 +43,7 @@ namespace CoreApi.Tasks
                                 Id = village.Id,
                                 PositionX = village.X,
                                 PositionY = village.Y,
+                                Active = true,
                                 WorldId = _world.Id
                             });
                             counter++;

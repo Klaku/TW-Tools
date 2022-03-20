@@ -128,6 +128,16 @@ namespace CoreApi.Tasks
                         scope_se.Debug("Threads Joined");
                     }
 
+                    using(MonitoredScope scope_de = new MonitoredScope($"Miner.World[{_world.SubDomain}].Deactivate.Entities", _logger))
+                    {
+                        int count = RemoveEntitiesTask.Players(players, _world);
+                        scope_de.Debug($"{count} Players closed");
+                        count = RemoveEntitiesTask.Tribes(tribes, _world);
+                        scope_de.Debug($"{count} Tribes closed");
+                        count = RemoveEntitiesTask.Villages(villages, _world);
+                        scope_de.Debug($"{count} Villages closed");
+                    }
+
                     using (MonitoredScope scope_sh = new MonitoredScope($"Miner.World[{_world.SubDomain}].Store.History", _logger))
                     {
                         List<Thread> threads = new List<Thread>();
@@ -185,6 +195,8 @@ namespace CoreApi.Tasks
                                     Name = tribe.Name,
                                     Tag = tribe.Tag,
                                     Ranking = tribe.Ranking,
+                                    Points = tribe.Points,
+                                    Villages = tribe.Villages,
                                     RA = ra != null ? ra.Score : 0,
                                     RO = ro != null ? ro.Score : 0,
                                     RS = all != null ? all.Score : 0,

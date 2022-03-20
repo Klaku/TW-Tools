@@ -7,6 +7,8 @@ import World from 'components/templates/World/World';
 import Home from 'views/Home/Home';
 import NotFound from 'views/NotFound/NotFound';
 import { WorldContext } from 'contexts/WorldContext';
+import TribesRanking from 'views/Ranking/Tribe/TribesRanking';
+import Ranking from 'views/Ranking/Home/Ranking';
 const Main = (props: PropsWithChildren<{}>) => {
   const { fetching } = useContext(WorldContext);
   if (fetching) {
@@ -24,14 +26,10 @@ const Main = (props: PropsWithChildren<{}>) => {
             <Route path="404" element={<NotFound />} />
             <Route path=":world" element={<World />}>
               <Route index element={<div>World Home</div>} />
-              <Route
-                path="rank"
-                element={
-                  <div>
-                    <span>Ranking</span>
-                  </div>
-                }
-              />
+              <Route path="rank" element={<Ranking />}>
+                <Route index element={<TribesRanking />} />
+                <Route path="tribe" element={<TribesRanking />} />
+              </Route>
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>

@@ -5,6 +5,7 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CoreApi.Requests
 {
@@ -23,7 +24,7 @@ namespace CoreApi.Requests
             using (MonitoredScope scope = new MonitoredScope($"Miner.World[{world.SubDomain}].Fetch.Stat.{statType}", _logger))
             {
                 List<string> rows = await Request.Fetch(world, $"/map/{statType}.txt", scope);
-                rows.ForEach(row =>
+                rows.Where(x => x != "").ToList().ForEach(row =>
                 {
                     try
                     {

@@ -42,6 +42,7 @@ namespace CoreApi.Tasks
                             {
                                 Id = tribe.Id,
                                 WorldId = _world.Id,
+                                Active = true,
                             });
                             counter++;
                         }

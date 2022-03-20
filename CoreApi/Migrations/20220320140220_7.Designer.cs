@@ -4,6 +4,7 @@ using CoreApi.Models.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreApi.Migrations
 {
     [DbContext(typeof(CustomContext))]
-    partial class CustomContextModelSnapshot : ModelSnapshot
+    [Migration("20220320140220_7")]
+    partial class _7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace CoreApi.Migrations
 
                     b.Property<int>("WorldId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -60,9 +59,6 @@ namespace CoreApi.Migrations
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
-                    b.Property<int>("Points24")
-                        .HasColumnType("int");
-
                     b.Property<int>("Points30")
                         .HasColumnType("int");
 
@@ -70,9 +66,6 @@ namespace CoreApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("RA")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RA24")
                         .HasColumnType("int");
 
                     b.Property<int>("RA30")
@@ -84,9 +77,6 @@ namespace CoreApi.Migrations
                     b.Property<int>("RO")
                         .HasColumnType("int");
 
-                    b.Property<int>("RO24")
-                        .HasColumnType("int");
-
                     b.Property<int>("RO30")
                         .HasColumnType("int");
 
@@ -96,9 +86,6 @@ namespace CoreApi.Migrations
                     b.Property<int>("RS")
                         .HasColumnType("int");
 
-                    b.Property<int>("RS24")
-                        .HasColumnType("int");
-
                     b.Property<int>("RS30")
                         .HasColumnType("int");
 
@@ -106,9 +93,6 @@ namespace CoreApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Ranking")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Ranking24")
                         .HasColumnType("int");
 
                     b.Property<int>("Ranking30")
@@ -121,9 +105,6 @@ namespace CoreApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("VillagesCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VillagesCount24")
                         .HasColumnType("int");
 
                     b.Property<int>("VillagesCount30")
@@ -200,9 +181,6 @@ namespace CoreApi.Migrations
                     b.Property<int>("WorldId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id", "WorldId");
 
                     b.HasIndex("WorldId");
@@ -224,9 +202,6 @@ namespace CoreApi.Migrations
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
-                    b.Property<int>("Points24")
-                        .HasColumnType("int");
-
                     b.Property<int>("Points30")
                         .HasColumnType("int");
 
@@ -234,9 +209,6 @@ namespace CoreApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("RA")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RA24")
                         .HasColumnType("int");
 
                     b.Property<int>("RA30")
@@ -248,9 +220,6 @@ namespace CoreApi.Migrations
                     b.Property<int>("RO")
                         .HasColumnType("int");
 
-                    b.Property<int>("RO24")
-                        .HasColumnType("int");
-
                     b.Property<int>("RO30")
                         .HasColumnType("int");
 
@@ -260,9 +229,6 @@ namespace CoreApi.Migrations
                     b.Property<int>("RS")
                         .HasColumnType("int");
 
-                    b.Property<int>("RS24")
-                        .HasColumnType("int");
-
                     b.Property<int>("RS30")
                         .HasColumnType("int");
 
@@ -270,9 +236,6 @@ namespace CoreApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Ranking")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Ranking24")
                         .HasColumnType("int");
 
                     b.Property<int>("Ranking30")
@@ -288,9 +251,6 @@ namespace CoreApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Villages")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Villages24")
                         .HasColumnType("int");
 
                     b.Property<int>("Villages30")
@@ -366,9 +326,6 @@ namespace CoreApi.Migrations
                     b.Property<int>("WorldId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
                     b.Property<int>("PositionX")
                         .HasColumnType("int");
 
@@ -394,9 +351,6 @@ namespace CoreApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Points")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Points24")
                         .HasColumnType("int");
 
                     b.Property<int>("Points30")

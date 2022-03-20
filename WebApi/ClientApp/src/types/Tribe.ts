@@ -1,0 +1,31 @@
+export interface TribeCurrent {
+  id: number;
+  worldId: number;
+  tribeId: number;
+  name: string;
+  tag: string;
+  ra: number;
+  villages: number;
+  villages7: number;
+  villages24: number;
+  villages30: number;
+  points: number;
+  points7: number;
+  points24: number;
+  points30: number;
+  rA7: number;
+  rA24: number;
+  rA30: number;
+  ro: number;
+  rO7: number;
+  rO24: number;
+  rO30: number;
+  rs: number;
+  rS7: number;
+  rS24: number;
+  rS30: number;
+  ranking: number;
+  ranking7: number;
+  ranking24: number;
+  ranking30: number;
+}

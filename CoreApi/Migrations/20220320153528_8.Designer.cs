@@ -4,6 +4,7 @@ using CoreApi.Models.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreApi.Migrations
 {
     [DbContext(typeof(CustomContext))]
-    partial class CustomContextModelSnapshot : ModelSnapshot
+    [Migration("20220320153528_8")]
+    partial class _8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace CoreApi.Migrations
 
                     b.Property<int>("WorldId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -200,9 +199,6 @@ namespace CoreApi.Migrations
                     b.Property<int>("WorldId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id", "WorldId");
 
                     b.HasIndex("WorldId");
@@ -365,9 +361,6 @@ namespace CoreApi.Migrations
 
                     b.Property<int>("WorldId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
 
                     b.Property<int>("PositionX")
                         .HasColumnType("int");
