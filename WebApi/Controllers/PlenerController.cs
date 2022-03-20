@@ -13,9 +13,9 @@ namespace WebApi.Controllers
     public class PlenerController : ControllerBase
     {
         [HttpGet]
-        public List<dtoTribeModel> GetTribes(int id)
+        public List<dtoTribeModelMinimal> GetTribes(int id)
         {
-            return new TribeService().GetTribes(id);
+            return new List<dtoTribeModelMinimal>();
         }
     }
 }

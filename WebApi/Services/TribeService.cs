@@ -11,14 +11,24 @@ namespace WebApi.Services
         {
             _db = new CustomContextFactory().CreateDbContext(null);
         }
-        public List<dtoTribeModel> GetTribes(int id)
+        public List<dtoTribeModelMinimal> ListTribesByWorldId(int worldId)
         {
-            return _db.TribeCurrent.Where(x => x.WorldId == id).Select(tribe => new dtoTribeModel()
+            return _db.TribeCurrent.Where(x => x.WorldId == worldId).Select(tribe => new dtoTribeModelMinimal()
             {
                 Id = tribe.Id,
                 Name = tribe.Name,
                 Tag = tribe.Tag,
             }).ToList();
+        }
+
+        public List<TribeCurrent> ListTribeData(int worldId, int skip, int top)
+        {
+            return _db.TribeCurrent
+                .Where(x => x.WorldId == worldId)
+                .OrderBy(x => x.Ranking)
+                .Skip(skip)
+                .Take(top)
+                .ToList();
         }
     }
 }

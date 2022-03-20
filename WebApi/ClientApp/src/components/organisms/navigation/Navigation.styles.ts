@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { getTheme } from "@fluentui/react";
-import { NavLink } from "react-router-dom";
+import styled from 'styled-components';
+import { getTheme } from '@fluentui/react';
+import { NavLink } from 'react-router-dom';
 const theme = getTheme();
 export const Navigation_Container = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const Navigation_Container = styled.div`
   justify-content: flex-start;
   background-color: ${theme.palette.neutralDark};
   height: 100vh;
-  color: ${theme.palette.neutralLight}
+  color: ${theme.palette.neutralLight};
 `;
 
 export const Item = styled.div`

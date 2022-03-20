@@ -1,12 +1,17 @@
-import Navigation from "components/organisms/navigation/Navigation";
-import React, { PropsWithChildren } from "react";
-import * as Styled from "./Main.styles";
-import { Routes, Route } from "react-router-dom";
-import Panel from "components/templates/Panel/Panel";
-import Home from "components/templates/Home/Home";
-import Plan from "components/templates/Plan/Plan";
-import NotFound from "components/templates/NotFound/NotFound";
+import Navigation from 'components/organisms/navigation/Navigation';
+import React, { PropsWithChildren, useContext } from 'react';
+import * as Styled from './Main.styles';
+import { Routes, Route } from 'react-router-dom';
+import Panel from 'components/templates/Panel/Panel';
+import World from 'components/templates/World/World';
+import Home from 'views/Home/Home';
+import NotFound from 'views/NotFound/NotFound';
+import { WorldContext } from 'contexts/WorldContext';
 const Main = (props: PropsWithChildren<{}>) => {
+  const { fetching } = useContext(WorldContext);
+  if (fetching) {
+    return <div>Wait</div>;
+  }
   return (
     <Styled.Grid_Layout>
       <Styled.Navigation_Container>
@@ -15,9 +20,20 @@ const Main = (props: PropsWithChildren<{}>) => {
       <Styled.Content_Container>
         <Routes>
           <Route path="/" element={<Panel />}>
-              <Route index element={<Home />} />
-              <Route path="plan" element={<Plan />} />
+            <Route index element={<Home />} />
+            <Route path="404" element={<NotFound />} />
+            <Route path=":world" element={<World />}>
+              <Route index element={<div>World Home</div>} />
+              <Route
+                path="rank"
+                element={
+                  <div>
+                    <span>Ranking</span>
+                  </div>
+                }
+              />
               <Route path="*" element={<NotFound />} />
+            </Route>
           </Route>
         </Routes>
       </Styled.Content_Container>
