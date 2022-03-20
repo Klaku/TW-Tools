@@ -33,9 +33,17 @@ namespace CoreApi.Models.DB
         public string Name { get; set; }
         public string Tag { get; set; }
         public int RA { get; set; }
+        public int RA7 { get; set; }
+        public int RA30 { get; set; }
         public int RO { get; set; }
+        public int RO7 { get; set; }
+        public int RO30 { get; set; }
         public int RS { get; set; }
+        public int RS7 { get; set; }
+        public int RS30 { get; set; }
         public int Ranking { get; set; }
+        public int Ranking7 { get; set; }
+        public int Ranking30 { get; set; }
         //Virtual Objects
         [ForeignKey("TribeId,WorldId")]
         public virtual Tribe Tribe { get; set; }

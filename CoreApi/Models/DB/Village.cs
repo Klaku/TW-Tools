@@ -29,6 +29,8 @@ namespace CoreApi.Models.DB
         public int PositionX { get; set; }
         public int PositionY { get; set; }
         public int Points { get; set; }
+        public int Points7 { get; set; }
+        public int Points30 { get; set; }
         //Foreign Keys
         public int? TribeId { get; set; }
         public int WorldId { get; set; }

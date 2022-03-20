@@ -72,10 +72,18 @@ namespace CoreApi.Tasks
                         players.ForEach(player =>
                         {
                             PlayerHistory playerHistory = _db.PlayerHistory
-                            .OrderBy(x => x.Created)
+                            .OrderByDescending(x => x.Created)
                             .Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id)
                             .FirstOrDefault();
-                            if(playerHistory != null)
+                            PlayerHistory playerHistory7 = _db.PlayerHistory
+                            .OrderByDescending(x => x.Created)
+                            .Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7))
+                            .FirstOrDefault();
+                            PlayerHistory playerHistory30 = _db.PlayerHistory
+                            .OrderByDescending(x => x.Created)
+                            .Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-30))
+                            .FirstOrDefault();
+                            if (playerHistory != null)
                             {
                                 currentPlayers.Add(new PlayerCurrent()
                                 {
@@ -84,11 +92,23 @@ namespace CoreApi.Tasks
                                     WorldId = _world.Id,
                                     Name = player.Name,
                                     Points = playerHistory.Points,
+                                    Points7 = playerHistory7 == null ? -1 : playerHistory7.Points,
+                                    Points30 = playerHistory30 == null ? -1 : playerHistory30.Points,
                                     VillagesCount = playerHistory.VillagesCount,
+                                    VillagesCount7 = playerHistory7 == null ? -1 : playerHistory7.VillagesCount,
+                                    VillagesCount30 = playerHistory30 == null ? -1 : playerHistory30.VillagesCount,
                                     Ranking = playerHistory.Ranking,
+                                    Ranking7 = playerHistory7 == null ? -1 : playerHistory7.Ranking,
+                                    Ranking30 = playerHistory30 == null ? -1 : playerHistory30.Ranking,
                                     RA = playerHistory.RA,
+                                    RA7 = playerHistory7 == null ? -1 : playerHistory7.RA,
+                                    RA30 = playerHistory30 == null ? -1 : playerHistory30.RA,
                                     RO = playerHistory.RO,
+                                    RO7 = playerHistory7 == null ? -1 : playerHistory7.RO,
+                                    RO30 = playerHistory30 == null ? -1 : playerHistory30.RO,
                                     RS = playerHistory.RS,
+                                    RS7 = playerHistory7 == null ? -1 : playerHistory7.RS,
+                                    RS30 = playerHistory30 == null ? -1 : playerHistory30.RS,
                                 });
                             }
                             else
@@ -106,11 +126,23 @@ namespace CoreApi.Tasks
                             {
                                 player.TribeId = currentPlayers[i].TribeId;
                                 player.Points = currentPlayers[i].Points;
+                                player.Points7 = currentPlayers[i].Points7;
+                                player.Points30 = currentPlayers[i].Points30;
                                 player.VillagesCount = currentPlayers[i].VillagesCount;
+                                player.VillagesCount7 = currentPlayers[i].VillagesCount7;
+                                player.VillagesCount30 = currentPlayers[i].VillagesCount30;
                                 player.Ranking = currentPlayers[i].Ranking;
+                                player.Ranking7 = currentPlayers[i].Ranking7;
+                                player.Ranking30 = currentPlayers[i].Ranking30;
                                 player.RA = currentPlayers[i].RA;
+                                player.RA7 = currentPlayers[i].RA7;
+                                player.RA30 = currentPlayers[i].RA30;
                                 player.RO = currentPlayers[i].RO;
+                                player.RO7 = currentPlayers[i].RO7;
+                                player.RO30 = currentPlayers[i].RO30;
                                 player.RS = currentPlayers[i].RS;
+                                player.RS7 = currentPlayers[i].RS7;
+                                player.RS30 = currentPlayers[i].RS30;
                             }
                             else
                             {
@@ -142,8 +174,16 @@ namespace CoreApi.Tasks
                         tribes.ForEach(tribe =>
                         {
                             TribeHistory tribeHistory = _db.TribeHistory
-                            .OrderBy(x => x.Created)
+                            .OrderByDescending(x => x.Created)
                             .Where(x => x.TribeId == tribe.Id && x.WorldId == _world.Id)
+                            .FirstOrDefault();
+                            TribeHistory tribeHistory7 = _db.TribeHistory
+                            .OrderByDescending(x => x.Created)
+                            .Where(x => x.TribeId == tribe.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7))
+                            .FirstOrDefault();
+                            TribeHistory tribeHistory30 = _db.TribeHistory
+                            .OrderByDescending(x => x.Created)
+                            .Where(x => x.TribeId == tribe.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-30))
                             .FirstOrDefault();
                             if (tribeHistory != null)
                             {
@@ -154,9 +194,17 @@ namespace CoreApi.Tasks
                                     Name = tribeHistory.Name,
                                     Tag = tribeHistory.Tag,
                                     RA = tribeHistory.RA,
+                                    RA7 = tribeHistory7 == null ? -1 : tribeHistory7.RA,
+                                    RA30 = tribeHistory30 == null ? -1 : tribeHistory30.RA,
                                     RO = tribeHistory.RO,
+                                    RO7 = tribeHistory7 == null ? -1 : tribeHistory7.RO,
+                                    RO30 = tribeHistory30 == null ? -1 : tribeHistory30.RO,
                                     RS = tribeHistory.RS,
+                                    RS7 = tribeHistory7 == null ? -1 : tribeHistory7.RS,
+                                    RS30 = tribeHistory30 == null ? -1 : tribeHistory30.RS,
                                     Ranking = tribeHistory.Ranking,
+                                    Ranking7 = tribeHistory7 == null ? -1 : tribeHistory7.Ranking,
+                                    Ranking30 = tribeHistory30 == null ? -1 : tribeHistory30.Ranking,
                                 });
                             }
                             else
@@ -175,9 +223,17 @@ namespace CoreApi.Tasks
                                 tribe.Name = currentTribes[i].Name;
                                 tribe.Tag = currentTribes[i].Tag;
                                 tribe.RA = currentTribes[i].RA;
+                                tribe.RA7 = currentTribes[i].RA7;
+                                tribe.RA30 = currentTribes[i].RA30;
                                 tribe.RO = currentTribes[i].RO;
+                                tribe.RO7 = currentTribes[i].RO7;
+                                tribe.RO30 = currentTribes[i].RO30;
                                 tribe.RS = currentTribes[i].RS;
+                                tribe.RS7 = currentTribes[i].RS7;
+                                tribe.RS30 = currentTribes[i].RS30;
                                 tribe.Ranking = currentTribes[i].Ranking;
+                                tribe.Ranking7 = currentTribes[i].Ranking7;
+                                tribe.Ranking30 = currentTribes[i].Ranking30;
                             }
                             else
                             {
@@ -209,8 +265,16 @@ namespace CoreApi.Tasks
                         villages.ForEach(village =>
                         {
                             VillageHistory villageHistory = _db.VillageHistory
-                            .OrderBy(x => x.Created)
+                            .OrderByDescending(x => x.Created)
                             .Where(x => x.VillageId == village.Id && x.WorldId == _world.Id)
+                            .FirstOrDefault();
+                            VillageHistory villageHistory7 = _db.VillageHistory
+                            .OrderByDescending(x => x.Created)
+                            .Where(x => x.VillageId == village.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7))
+                            .FirstOrDefault();
+                            VillageHistory villageHistory30 = _db.VillageHistory
+                            .OrderByDescending(x => x.Created)
+                            .Where(x => x.VillageId == village.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-30))
                             .FirstOrDefault();
                             var CurrentOwner = _db.PlayerCurrents.FirstOrDefault(x => x.PlayerId == villageHistory.PlayerId);
                             if (villageHistory != null)
@@ -220,6 +284,8 @@ namespace CoreApi.Tasks
                                     PositionX = village.PositionX,
                                     PositionY = village.PositionY,
                                     Points = villageHistory.Points,
+                                    Points7 = villageHistory7 == null ? -1 : villageHistory7.Points,
+                                    Points30 = villageHistory7 == null ? -1 : villageHistory30.Points,
                                     WorldId = _world.Id,
                                     VillageId = village.Id,
                                     PlayerId = villageHistory.PlayerId,
@@ -239,6 +305,8 @@ namespace CoreApi.Tasks
                             if (village != null)
                             {
                                 village.Points = currentVillages[i].Points;
+                                village.Points7 = currentVillages[i].Points7;
+                                village.Points30 = currentVillages[i].Points30;
                                 village.PlayerId = currentVillages[i].PlayerId;
                             }
                             else
