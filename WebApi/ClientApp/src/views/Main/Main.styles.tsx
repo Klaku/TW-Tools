@@ -14,3 +14,18 @@ export const Content_Container = styled.div`
   grid-row: 1;
   grid-column: 2;
 `;
+
+export const PlaceholderWrapper = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+export const SpinnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;

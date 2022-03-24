@@ -3,31 +3,30 @@ using WebApi.Models;
 using CoreApi.Models.DB;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-
 namespace WebApi.Services
 {
-    public class TribeService
+    public class PlayerService
     {
         readonly CustomContext _db;
-        public TribeService()
+
+        public PlayerService()
         {
             _db = new CustomContextFactory().CreateDbContext(null);
         }
 
-        public List<TribeCurrent> GetTribes(int worldId)
+        public List<PlayerCurrent> GetPlayers(int worldId)
         {
-            List<TribeCurrent> items =
-                _db.TribeCurrent
-                .Include(x => x.Tribe)
-                .Where(x => x.WorldId == worldId && x.Tribe.Active == true)
+            List<PlayerCurrent> items =
+                _db.PlayerCurrents
+                .Include(x => x.Player)
+                .Where(x => x.WorldId == worldId && x.Player.Active == true)
                 .OrderBy(x => x.Ranking)
                 .ToList();
-            return items.Select(tribe =>
+            return items.Select(player =>
             {
-                tribe.Tribe = null;
-                return tribe;
+                player.Player = null;
+                return player;
             }).ToList();
-
         }
     }
 }

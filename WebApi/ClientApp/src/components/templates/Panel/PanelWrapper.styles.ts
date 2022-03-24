@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Component_Wrapper = styled.div`
-  max-height: calc(100vh - 50px);
+  max-height: 100vh;
+  height: 100vh;
   min-height: calc(100vh - 50px);
   padding: 25px;
   overflow: auto;
@@ -50,3 +51,10 @@ export const Section = styled.div`
   width: 100%;
   flex-grow: 1;
 `;
+
+export const SectionRow = styled.div`
+  display:flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
+`

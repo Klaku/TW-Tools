@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useContext } from 'react';
 import * as Styled from './Navigation.styles';
 import { WorldContext } from 'contexts/WorldContext';
 const Navigation = (props: PropsWithChildren<{}>) => {
-  const { list, selected } = useContext(WorldContext);
+  const { worlds: list, selected } = useContext(WorldContext);
   return (
     <Styled.Navigation_Container>
       <Styled.Container>
@@ -17,6 +17,9 @@ const Navigation = (props: PropsWithChildren<{}>) => {
           </Styled.NavigationLink>
           <Styled.NavigationLink to={`/${selected.subDomain}/rank`}>
             <Styled.Item>Ranking</Styled.Item>
+          </Styled.NavigationLink>
+          <Styled.NavigationLink to={`/${selected.subDomain}/map`}>
+            <Styled.Item>Mapa</Styled.Item>
           </Styled.NavigationLink>
           <Styled.NavigationLink to={'/foo'}>
             <Styled.Item>404 level 1</Styled.Item>

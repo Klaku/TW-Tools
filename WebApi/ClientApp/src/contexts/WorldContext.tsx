@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export interface IWorldContext {
-  list: IWorld[];
+  worlds: IWorld[];
   selected: IWorld | null;
   setSelectedWorld: (world: IWorld | null) => void;
   fetching: boolean;
@@ -14,7 +14,7 @@ export interface IWorld {
   subDomain: string;
 }
 const DefaultContextValue: IWorldContext = {
-  list: [],
+  worlds: [],
   selected: null,
   setSelectedWorld: () => {},
   fetching: true,
@@ -40,7 +40,7 @@ export const WorldContextWrapper = (props: PropsWithChildren<{}>) => {
   return (
     <WorldContext.Provider
       value={{
-        list: worlds,
+        worlds: worlds,
         selected: selectedWorld,
         setSelectedWorld,
         fetching,

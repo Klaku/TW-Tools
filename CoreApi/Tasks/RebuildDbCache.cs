@@ -217,6 +217,10 @@ namespace CoreApi.Tasks
                                     Points7 = tribeHistory7 == null ? -1 : tribeHistory7.Points,
                                     Points24 = tribeHistory24 == null ? -1 : tribeHistory24.Points,
                                     Points30 = tribeHistory30 == null ? -1 : tribeHistory30.Points,
+                                    Villages = tribeHistory.Villages,
+                                    Villages7 = tribeHistory7 == null ? -1 : tribeHistory7.Villages,
+                                    Villages24 = tribeHistory24 == null ? -1 : tribeHistory24.Villages,
+                                    Villages30 = tribeHistory30 == null ? -1 : tribeHistory30.Villages,
                                     RA = tribeHistory.RA,
                                     RA7 = tribeHistory7 == null ? -1 : tribeHistory7.RA,
                                     RA24 = tribeHistory24 == null ? -1 : tribeHistory24.RA,
@@ -254,6 +258,10 @@ namespace CoreApi.Tasks
                                 tribe.Points7 = currentTribes[i].Points7;
                                 tribe.Points24 = currentTribes[i].Points24;
                                 tribe.Points30 = currentTribes[i].Points30;
+                                tribe.Villages = currentTribes[i].Villages;
+                                tribe.Villages7 = currentTribes[i].Villages7;
+                                tribe.Villages24 = currentTribes[i].Villages24;
+                                tribe.Villages30 = currentTribes[i].Villages30;
                                 tribe.RA = currentTribes[i].RA;
                                 tribe.RA7 = currentTribes[i].RA7;
                                 tribe.RA24 = currentTribes[i].RA24;

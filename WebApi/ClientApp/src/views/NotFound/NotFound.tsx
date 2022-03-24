@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import * as Panel from 'components/templates/Panel/Panel.styles';
+import * as Panel from 'components/templates/Panel/PanelWrapper.styles';
 const NotFound = (props: PropsWithChildren<{}>) => {
   return (
     <Panel.Wrapper>

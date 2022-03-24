@@ -1,4 +1,4 @@
-export interface TribeCurrent {
+export type Tribe = {
   id: number;
   worldId: number;
   tribeId: number;

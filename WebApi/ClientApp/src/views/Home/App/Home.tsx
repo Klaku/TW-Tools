@@ -1,11 +1,11 @@
 import { WorldContext } from 'contexts/WorldContext';
 import React, { PropsWithChildren, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as Panel from 'components/templates/Panel/Panel.styles';
+import * as Panel from 'components/templates/Panel/PanelWrapper.styles';
 import * as Styled from './Home.styles';
 import { DefaultButton } from '@fluentui/react';
 const Home = (props: PropsWithChildren<{}>) => {
-  const { list, setSelectedWorld } = useContext(WorldContext);
+  const { worlds: list, setSelectedWorld } = useContext(WorldContext);
   const navigate = useNavigate();
 
   return (

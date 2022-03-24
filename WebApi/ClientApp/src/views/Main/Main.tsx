@@ -2,18 +2,30 @@ import Navigation from 'components/organisms/navigation/Navigation';
 import React, { PropsWithChildren, useContext } from 'react';
 import * as Styled from './Main.styles';
 import { Routes, Route } from 'react-router-dom';
-import Panel from 'components/templates/Panel/Panel';
-import World from 'components/templates/World/World';
-import Home from 'views/Home/Home';
+import Panel from 'components/templates/Panel/PanelWrapper';
+import World from 'components/templates/World/WorldWrapper';
+import Home from 'views/Home/App/Home';
 import NotFound from 'views/NotFound/NotFound';
 import { WorldContext } from 'contexts/WorldContext';
-import TribesRanking from 'views/Ranking/Tribe/TribesRanking';
-import Ranking from 'views/Ranking/Home/Ranking';
+import Map from 'views/Map/Map';
+import { Spinner } from '@fluentui/react';
+import WorldHome from 'views/Home/World/Home';
+import Ranking from 'views/Ranking/Ranking';
 const Main = (props: PropsWithChildren<{}>) => {
-  const { fetching } = useContext(WorldContext);
-  if (fetching) {
-    return <div>Wait</div>;
+  const Context = {
+    World: useContext(WorldContext),
+  };
+
+  if (Context.World.fetching) {
+    return (
+      <Styled.PlaceholderWrapper>
+        <Styled.SpinnerWrapper>
+          <Spinner label="Wczytywanie danych" />
+        </Styled.SpinnerWrapper>
+      </Styled.PlaceholderWrapper>
+    );
   }
+
   return (
     <Styled.Grid_Layout>
       <Styled.Navigation_Container>
@@ -25,11 +37,15 @@ const Main = (props: PropsWithChildren<{}>) => {
             <Route index element={<Home />} />
             <Route path="404" element={<NotFound />} />
             <Route path=":world" element={<World />}>
-              <Route index element={<div>World Home</div>} />
+              <Route index element={<WorldHome />} />
               <Route path="rank" element={<Ranking />}>
-                <Route index element={<TribesRanking />} />
-                <Route path="tribe" element={<TribesRanking />} />
+                <Route path=":type" element={<Ranking />}>
+                  <Route path=":sort" element={<Ranking />}>
+                    <Route path=":method" element={<Ranking />} />
+                  </Route>
+                </Route>
               </Route>
+              <Route path="map" element={<Map />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>
