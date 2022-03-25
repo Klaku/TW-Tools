@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]/[Action]")]
     [ApiController]
     public class WorldController : ControllerBase
     {
