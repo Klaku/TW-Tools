@@ -17,14 +17,13 @@ namespace Dashboard
         {
             services.AddHangfire(config =>
             config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-            .UseSimpleAssemblyNameTypeSerializer().UseDefaultTypeSerializer()
-            .UseMemoryStorage());
-
-            services.AddHangfireServer();
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseDefaultTypeSerializer()
+            .UseSqlServerStorage("Server=DESKTOP-AEK8MHR\\SQLEXPRESS;Database=Hangfire;Integrated Security=SSPI;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobManager)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -43,8 +42,7 @@ namespace Dashboard
 
             app.UseHangfireDashboard();
 
-            DataMiner miner = new DataMiner();
-            recurringJobManager.AddOrUpdate("Get Data", () => miner.Process(), "5 * * * *");
+            
 
         }
     }
