@@ -45,7 +45,15 @@ namespace CoreApi.Models.DB
         public CustomContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<CustomContext>();
-            optionsBuilder.UseSqlServer(args[0]);
+            if (args.Length > 0)
+            {
+                optionsBuilder.UseSqlServer(args[0]);
+            }
+            else
+            {
+                optionsBuilder.UseSqlServer(ContextOf(ConnectionStrings.AzureDatabase)[0]);
+            }
+
 
             return new CustomContext(optionsBuilder.Options);
         }
@@ -55,12 +63,12 @@ namespace CoreApi.Models.DB
             switch (value)
             {
                 case ConnectionStrings.AzureDatabase:
-                    return new[] { "#########################" };
+                    return new[] { "#" };
                 case ConnectionStrings.LocalDatabase:
-                    return new[] { "#########################" };
+                    return new[] { @"#" };
                 case ConnectionStrings.LocalHangfireDatabase:
-                    return new[] { "#########################" };
-                default: 
+                    return new[] { @"#" };
+                default:
                     return new[] { "" };
             }
         }
