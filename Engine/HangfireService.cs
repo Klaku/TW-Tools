@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hangfire;
 using CoreApi.Tasks;
+using CoreApi.Models.DB;
 namespace Engine
 {
     public class HangfireService : IDisposable
@@ -13,7 +14,7 @@ namespace Engine
 
         public HangfireService()
         {
-            GlobalConfiguration.Configuration.UseSqlServerStorage("Server=DESKTOP-AEK8MHR\\SQLEXPRESS;Database=Hangfire;Integrated Security=SSPI;");
+            GlobalConfiguration.Configuration.UseSqlServerStorage(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.LocalHangfireDatabase)[0]);
             _server = new BackgroundJobServer();
         }
 

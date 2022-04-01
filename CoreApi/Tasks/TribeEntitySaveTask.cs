@@ -20,7 +20,7 @@ namespace CoreApi.Tasks
         public TribeEntitySaveTask(List<TribeModel> tribes, World world, MonitoredScope scope)
         {
             _tribes = tribes;
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
             _scope = scope;
             _world = world;
         }
@@ -70,7 +70,7 @@ namespace CoreApi.Tasks
         public TribeHistorySaveTask(List<TribeHistory> tribes, MonitoredScope scope)
         {
             _tribes = tribes;
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
             _scope = scope;
         }
 

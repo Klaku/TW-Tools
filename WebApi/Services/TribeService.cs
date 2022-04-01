@@ -11,7 +11,7 @@ namespace WebApi.Services
         readonly CustomContext _db;
         public TribeService()
         {
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
         }
 
         public List<TribeCurrent> GetTribes(int worldId)

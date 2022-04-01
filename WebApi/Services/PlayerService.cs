@@ -11,7 +11,7 @@ namespace WebApi.Services
 
         public PlayerService()
         {
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
         }
 
         public List<PlayerCurrent> GetPlayers(int worldId)

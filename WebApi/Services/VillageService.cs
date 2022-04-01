@@ -11,7 +11,7 @@ namespace WebApi.Services
         CustomContext _db;
         public VillageService()
         {
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
         }
 
         public List<VillageCurrent> GetVillagesByPlayerId(int worldId, int playerId)

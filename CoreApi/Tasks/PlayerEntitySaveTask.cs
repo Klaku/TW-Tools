@@ -20,7 +20,7 @@ namespace CoreApi.Tasks
         public PlayerEntitySaveTask(List<PlayerModel> players, World world, MonitoredScope scope)
         {
             _players = players;
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
             _scope = scope;
             _world = world;
         }
@@ -71,7 +71,7 @@ namespace CoreApi.Tasks
         public PlayerHistorySaveTask(List<PlayerHistory> players, MonitoredScope scope)
         {
             _players = players;
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
             _scope = scope;
         }
 

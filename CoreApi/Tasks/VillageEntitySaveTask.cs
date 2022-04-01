@@ -20,7 +20,7 @@ namespace CoreApi.Tasks
         public VillageEntitySaveTask(List<VillageModel> villages, World world, MonitoredScope scope)
         {
             _villages = villages;
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
             _scope = scope;
             _world = world;
         }
@@ -70,7 +70,7 @@ namespace CoreApi.Tasks
         public VillageHistorySaveTask(List<VillageHistory> villages, MonitoredScope scope)
         {
             _villages = villages;
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
             _scope = scope;
         }
 

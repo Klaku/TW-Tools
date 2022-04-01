@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using CoreApi.Tasks;
+using CoreApi.Models.DB;
+
 namespace Dashboard
 {
     public class Startup
@@ -19,7 +21,7 @@ namespace Dashboard
             config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
             .UseSimpleAssemblyNameTypeSerializer()
             .UseDefaultTypeSerializer()
-            .UseSqlServerStorage("Server=DESKTOP-AEK8MHR\\SQLEXPRESS;Database=Hangfire;Integrated Security=SSPI;"));
+            .UseSqlServerStorage(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.LocalHangfireDatabase)[0]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,26 +1,48 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using CoreApi.Models.DB;
-using System.Linq;
 using System.Collections.Generic;
 using WebApi.Services;
-using WebApi.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Caching.Memory;
+using System;
+
 namespace WebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class VillageController : ControllerBase
+    public class VillageController : ApiController
     {
+        public VillageController(IMemoryCache _cache, IConfiguration configuration) : base(_cache, configuration)
+        {
+        }
         [HttpGet]
         public List<VillageCurrent> GetVillagesByPlayerId(int worldId, int playerId)
         {
-            return new VillageService().GetVillagesByPlayerId(worldId, playerId);
+            string cacheKey = $"VbpId[{worldId}][{playerId}]";
+            if (!_memoryCache.TryGetValue(cacheKey, out List<VillageCurrent> cacheValue))
+            {
+                cacheValue = new VillageService().GetVillagesByPlayerId(worldId, playerId);
+                var options = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(30));
+
+                _memoryCache.Set(cacheKey, cacheValue, options);
+            }
+            return cacheValue;
         }
 
         [HttpGet]
         public List<VillageCurrent> GetVillagesByTribeId(int worldId, int tribeId)
         {
-            return new VillageService().GetVillagesByTribeId(worldId, tribeId);
+            string cacheKey = $"VbtId[{worldId}][{tribeId}]";
+            if (!_memoryCache.TryGetValue(cacheKey, out List<VillageCurrent> cacheValue))
+            {
+                cacheValue = new VillageService().GetVillagesByTribeId(worldId, tribeId);
+                var options = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(30));
+
+                _memoryCache.Set(cacheKey, cacheValue, options);
+            }
+            return cacheValue;
         }
     }
 }

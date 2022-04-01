@@ -42,12 +42,34 @@ namespace CoreApi.Models.DB
 
     public class CustomContextFactory : IDesignTimeDbContextFactory<CustomContext>
     {
-        public  CustomContext CreateDbContext(string[] args)
+        public CustomContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<CustomContext>();
-            optionsBuilder.UseSqlServer($"Server=DESKTOP-AEK8MHR\\SQLEXPRESS;Database=TwHelper;Integrated Security=SSPI;");
+            optionsBuilder.UseSqlServer(args[0]);
 
             return new CustomContext(optionsBuilder.Options);
+        }
+
+        public static string[] ContextOf(ConnectionStrings value)
+        {
+            switch (value)
+            {
+                case ConnectionStrings.AzureDatabase:
+                    return new[] { "#########################" };
+                case ConnectionStrings.LocalDatabase:
+                    return new[] { "#########################" };
+                case ConnectionStrings.LocalHangfireDatabase:
+                    return new[] { "#########################" };
+                default: 
+                    return new[] { "" };
+            }
+        }
+
+        public enum ConnectionStrings
+        {
+            AzureDatabase =0,
+            LocalDatabase = 1,
+            LocalHangfireDatabase = 2
         }
     }
 }

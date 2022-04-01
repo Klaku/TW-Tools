@@ -23,7 +23,7 @@ namespace CoreApi.Tasks
         public RebuildDbCache()
         {
             _logger = LogManager.GetCurrentClassLogger();
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
         }
 
         public void Process()
@@ -54,7 +54,7 @@ namespace CoreApi.Tasks
         public RebuildWorldCache(World world)
         {
             _logger = LogManager.GetCurrentClassLogger();
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
             _world = world;
         }
         public void Start()

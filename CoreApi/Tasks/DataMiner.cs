@@ -22,7 +22,7 @@ namespace CoreApi.Tasks
         public DataMiner()
         {
             _logger = LogManager.GetCurrentClassLogger();
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
         }
 
         public void Process()

@@ -10,7 +10,7 @@ namespace WebApi.Services
         readonly CustomContext _db;
         public WorldService()
         {
-            _db = new CustomContextFactory().CreateDbContext(null);
+            _db = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase));
         }
         public List<dtoWorldModel> GetList()
         {

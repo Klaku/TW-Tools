@@ -13,7 +13,7 @@ namespace CoreApi.Tasks
     {
         public static int Tribes(List<TribeModel> tribes, World world)
         {
-            using (CustomContext context = new CustomContextFactory().CreateDbContext(null))
+            using (CustomContext context = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase)))
             {
                 int result = 0;
                 List<Tribe> entities = context.Tribe.Where(t => t.WorldId == world.Id && t.Active == true).ToList();
@@ -33,7 +33,7 @@ namespace CoreApi.Tasks
 
         public static int Players(List<PlayerModel> players, World world)
         {
-            using (CustomContext context = new CustomContextFactory().CreateDbContext(null))
+            using (CustomContext context = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase)))
             {
                 int result = 0;
                 List<Player> entities = context.Player.Where(t => t.WorldId == world.Id && t.Active == true).ToList();
@@ -52,7 +52,7 @@ namespace CoreApi.Tasks
 
         public static int Villages(List<VillageModel> villages, World world)
         {
-            using (CustomContext context = new CustomContextFactory().CreateDbContext(null))
+            using (CustomContext context = new CustomContextFactory().CreateDbContext(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.AzureDatabase)))
             {
                 int result = 0;
                 List<Village> entities = context.Village.Where(t => t.WorldId == world.Id && t.Active == true).ToList();

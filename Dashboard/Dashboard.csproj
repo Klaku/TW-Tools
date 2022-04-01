@@ -17,12 +17,4 @@
     <ProjectReference Include="..\CoreApi\CoreApi.csproj" />
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="iisreset /stop" />
-  </Target>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="iisreset /start" />
-  </Target>
-
 </Project>
