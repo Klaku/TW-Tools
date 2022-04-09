@@ -74,6 +74,10 @@ namespace CoreApi.Tasks
                     catch (Exception exc)
                     {
                         scope.Error(exc.Message);
+                        if(exc.InnerException != null)
+                        {
+                            scope.Error(exc.InnerException.Message);
+                        }
                     }
 
                 });

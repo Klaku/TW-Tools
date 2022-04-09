@@ -69,7 +69,7 @@ namespace CoreApi.Tasks
                         players = _db.Player.Where(x => x.WorldId == _world.Id && x.Active == true).ToList();
                         subScope.Debug($"Received {players.Count} Players");
                         List<Thread> threads = new List<Thread>();
-                        int page_size = 50;
+                        int page_size = 150;
                         int paged = (int)Math.Ceiling((double)players.Count / page_size);
                         for (var i = 0; i < paged; i++)
                         {
@@ -78,6 +78,11 @@ namespace CoreApi.Tasks
                             Thread t = new Thread(() => task.Start());
                             t.Start();
                             threads.Add(t);
+                            if((i+1) %20 == 0)
+                            {
+                                threads.ForEach(thread => thread.Join());
+                                threads.Clear();
+                            }
                         }
                         threads.ForEach(thread => thread.Join());
                         subScope.Debug("Threads joined");
@@ -97,7 +102,7 @@ namespace CoreApi.Tasks
                         tribes = _db.Tribe.Where(x => x.WorldId == _world.Id && x.Active == true).ToList();
                         scope.Debug($"Received {tribes.Count} Tribes");
                         List<Thread> threads = new List<Thread>();
-                        int page_size = 50;
+                        int page_size = 150;
                         int paged = (int)Math.Ceiling((double)tribes.Count / page_size);
                         for (var i = 0; i < paged; i++)
                         {
@@ -106,6 +111,11 @@ namespace CoreApi.Tasks
                             Thread t = new Thread(() => task.Start());
                             t.Start();
                             threads.Add(t);
+                            if ((i + 1) % 20 == 0)
+                            {
+                                threads.ForEach(thread => thread.Join());
+                                threads.Clear();
+                            }
                         }
                         threads.ForEach(thread => thread.Join());
                         subScope.Debug("Threads joined");
@@ -124,7 +134,7 @@ namespace CoreApi.Tasks
                         villages = _db.Village.Where(x => x.WorldId == _world.Id && x.Active == true).ToList();
                         subScope.Debug($"Received {villages.Count} Villages");
                         List<Thread> threads = new List<Thread>();
-                        int page_size = 50;
+                        int page_size = 150;
                         int paged = (int)Math.Ceiling((double)villages.Count / page_size);
                         for (var i = 0; i < paged; i++)
                         {
@@ -133,6 +143,11 @@ namespace CoreApi.Tasks
                             Thread t = new Thread(() => task.Start());
                             t.Start();
                             threads.Add(t);
+                            if ((i + 1) % 20 == 0)
+                            {
+                                threads.ForEach(thread => thread.Join());
+                                threads.Clear();
+                            }
                         }
                         threads.ForEach(thread => thread.Join());
                         subScope.Debug("Threads joined");

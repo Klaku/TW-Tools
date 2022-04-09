@@ -21,7 +21,7 @@ namespace Engine
         public void Reinstall()
         {
             DataMiner miner = new DataMiner();
-            RecurringJob.AddOrUpdate("Get Data", () => miner.Process(), "5 * * * *");
+            RecurringJob.AddOrUpdate("Get Data", () => miner.Process(), "5 */4 * * *");
         }
 
         public void Dispose()

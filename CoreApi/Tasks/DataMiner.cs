@@ -37,6 +37,11 @@ namespace CoreApi.Tasks
                     Thread thread = new Thread(() => task.Process());
                     thread.Start();
                     threads.Add(thread);
+                    if(threads.Count % 2 == 0)
+                    {
+                        threads.ForEach(thread => thread.Join());
+                        threads.Clear();
+                    }
                 }
 
                 threads.ForEach(thread => thread.Join());
