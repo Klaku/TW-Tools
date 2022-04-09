@@ -1,6 +1,6 @@
 export interface IWorld {
-  id: number;
-  name: string;
-  domain: string;
-  subDomain: string;
+  Id: number;
+  Name: string;
+  Domain: string;
+  SubDomain: string;
 }

@@ -19,9 +19,9 @@ const PlayerRanking = (props: PropsWithChildren<{ filter: string }>) => {
   const navigate = useNavigate();
   const redirect = (key: string) => {
     if (sort == key && method != 'desc') {
-      navigate(`/${Contexts.World.selected?.subDomain}/rank/player/${key}/desc`);
+      navigate(`/${Contexts.World.selected?.SubDomain}/rank/player/${key}/desc`);
     } else {
-      navigate(`/${Contexts.World.selected?.subDomain}/rank/player/${key}/asc`);
+      navigate(`/${Contexts.World.selected?.SubDomain}/rank/player/${key}/asc`);
     }
   };
   const keySort = (a: Player, b: Player) => {
@@ -29,37 +29,37 @@ const PlayerRanking = (props: PropsWithChildren<{ filter: string }>) => {
     switch (sort) {
       case 'nr':
       case 'points':
-        c = a.points;
-        d = b.points;
+        c = a.Points;
+        d = b.Points;
         break;
       case 'name':
-        c = a.name;
-        d = b.name;
+        c = a.Name;
+        d = b.Name;
         break;
       case 'villages':
-        c = a.villagesCount;
-        d = b.villagesCount;
+        c = a.VillagesCount;
+        d = b.VillagesCount;
         break;
       case 'ra':
-        c = a.ra;
-        d = b.ra;
+        c = a.RA;
+        d = b.RA;
         break;
       case 'ro':
-        c = a.ro;
-        d = b.ro;
+        c = a.RO;
+        d = b.RO;
         break;
       case 'rs':
-        c = a.rs;
-        d = b.rs;
+        c = a.RS;
+        d = b.RS;
         break;
       default:
-        d = a.ranking;
-        c = b.ranking;
+        d = a.Ranking;
+        c = b.Ranking;
         break;
     }
     return (c < d ? -1 : 1) * (method == 'desc' ? 1 : -1);
   };
-  const VisiblePlayers = Contexts.Player.players.filter((x) => x.name.toLowerCase().indexOf(props.filter.toLowerCase()) != -1);
+  const VisiblePlayers = Contexts.Player.players.filter((x) => x.Name.toLowerCase().indexOf(props.filter.toLowerCase()) != -1);
   return (
     <Panel.Section>
       <Panel.Title2>Ranking graczy</Panel.Title2>
@@ -118,7 +118,7 @@ const PlayerRanking = (props: PropsWithChildren<{ filter: string }>) => {
           <ExpandContainer></ExpandContainer>
         </HeaderRow>
         {VisiblePlayers.sort(keySort).map((player) => {
-          return <ListItemComponent key={player.id} player={player} />;
+          return <ListItemComponent key={player.Id} player={player} />;
         })}
       </ListWrapper>
     </Panel.Section>
@@ -168,23 +168,23 @@ const ListItemComponent = (props: PropsWithChildren<{ player: Player }>) => {
   return (
     <Item>
       <HeaderRow>
-        <Col style={{ width: 25 }}>{player.ranking}</Col>
-        <Col style={{ minWidth: 50 }}>{Tribe.tribes.filter((x) => x.tribeId == player.tribeId)[0]?.tag}</Col>
-        <Col style={{ minWidth: 50, flexGrow: 1 }}>{player.name}</Col>
+        <Col style={{ width: 25 }}>{player.Ranking}</Col>
+        <Col style={{ minWidth: 50 }}>{Tribe.tribes.filter((x) => x.TribeId == player.TribeId)[0]?.Tag}</Col>
+        <Col style={{ minWidth: 50, flexGrow: 1 }}>{player.Name}</Col>
         <Col style={{ width: 100 }}>
-          <ValueColor value={player.points - player.points24}>{Number(player.points).toLocaleString('de')}</ValueColor>
+          <ValueColor value={player.Points - player.Points24}>{Number(player.Points).toLocaleString('de')}</ValueColor>
         </Col>
         <Col style={{ width: 60 }}>
-          <ValueColor value={player.villagesCount - player.villagesCount24}>{Number(player.villagesCount).toLocaleString('de')}</ValueColor>
+          <ValueColor value={player.VillagesCount - player.VillagesCount24}>{Number(player.VillagesCount).toLocaleString('de')}</ValueColor>
         </Col>
         <Col style={{ width: 100 }}>
-          <ValueColor value={player.ra - player.rA24}>{Number(player.ra).toLocaleString('de')}</ValueColor>
+          <ValueColor value={player.RA - player.RA24}>{Number(player.RA).toLocaleString('de')}</ValueColor>
         </Col>
         <Col style={{ width: 100 }}>
-          <ValueColor value={player.ro - player.rO24}>{Number(player.ro).toLocaleString('de')}</ValueColor>
+          <ValueColor value={player.RO - player.RO24}>{Number(player.RO).toLocaleString('de')}</ValueColor>
         </Col>
         <Col style={{ width: 100 }}>
-          <ValueColor value={player.rs - player.rS24}>{Number(player.rs).toLocaleString('de')}</ValueColor>
+          <ValueColor value={player.RS - player.RS24}>{Number(player.RS).toLocaleString('de')}</ValueColor>
         </Col>
         {isCollapsed ? (
           <ExpandContainer
@@ -214,12 +214,12 @@ const ListItemComponent = (props: PropsWithChildren<{ player: Player }>) => {
             <DataItem>30dni</DataItem>
             <ExpandContainer></ExpandContainer>
           </DataRow>
-          {RowData('Ranking', player.ranking, player.ranking24, player.ranking7, player.ranking30)}
-          {RowData('Liczba Punktów', player.points, player.points24, player.points7, player.points30)}
-          {RowData('Liczba Wiosek', player.villagesCount, player.villagesCount24, player.villagesCount7, player.villagesCount30)}
-          {RowData('Pokonani w Ataku', player.ra, player.rA24, player.rA7, player.rA30)}
-          {RowData('Pokonani w Obronie', player.ro, player.rO24, player.rO7, player.rO30)}
-          {RowData('Pokonani Razem', player.rs, player.rS24, player.rS7, player.rS30)}
+          {RowData('Ranking', player.Ranking, player.Ranking24, player.Ranking7, player.Ranking30)}
+          {RowData('Liczba Punktów', player.Points, player.Points24, player.Points7, player.Points30)}
+          {RowData('Liczba Wiosek', player.VillagesCount, player.VillagesCount24, player.VillagesCount7, player.VillagesCount30)}
+          {RowData('Pokonani w Ataku', player.RA, player.RA24, player.RA7, player.RA30)}
+          {RowData('Pokonani w Obronie', player.RO, player.RO24, player.RO7, player.RO30)}
+          {RowData('Pokonani Razem', player.RS, player.RS24, player.RS7, player.RS30)}
         </DataContainer>
       )}
     </Item>

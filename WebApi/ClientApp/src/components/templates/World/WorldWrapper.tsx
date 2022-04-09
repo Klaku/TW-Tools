@@ -16,7 +16,7 @@ const WorldWrapper = (props: PropsWithChildren<{}>) => {
   };
   useEffect(() => {
     if (typeof params.world != 'undefined') {
-      let selectedWorld = Contexts.World.worlds.find((x) => x.subDomain == params.world) || null;
+      let selectedWorld = Contexts.World.worlds.find((x) => x.SubDomain == params.world) || null;
       Contexts.World.setSelectedWorld(selectedWorld);
       if (selectedWorld == null) {
         navigate('/404');

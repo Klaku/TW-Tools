@@ -8,10 +8,10 @@ export interface IWorldContext {
   fetching: boolean;
 }
 export interface IWorld {
-  id: number;
-  name: string;
-  domain: string;
-  subDomain: string;
+  Id: number;
+  Name: string;
+  Domain: string;
+  SubDomain: string;
 }
 const DefaultContextValue: IWorldContext = {
   worlds: [],
@@ -32,7 +32,7 @@ export const WorldContextWrapper = (props: PropsWithChildren<{}>) => {
       .then((data: IWorld[]) => {
         setWorlds(data);
         if (typeof params.world != 'undefined') {
-          setSelectedWorld(data.find((x) => x.subDomain == params.world) || null);
+          setSelectedWorld(data.find((x) => x.SubDomain == params.world) || null);
         }
         setFetching(false);
       });

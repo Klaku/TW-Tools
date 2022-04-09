@@ -24,7 +24,7 @@ export const PlayerContextWrapper = (props: PropsWithChildren<{}>) => {
   const fetchPlayers = () => {
     if (context.selected != null) {
       setFetching(true);
-      fetch(`/api/Player/GetPlayers?worldId=${context.selected?.id}`)
+      fetch(`/api/Player/GetPlayers?worldId=${context.selected?.Id}`)
         .then((response) => response.json())
         .then((data: Player[]) => {
           setPlayers(data);

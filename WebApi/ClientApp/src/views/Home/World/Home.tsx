@@ -9,7 +9,7 @@ const Home = (props: PropsWithChildren<{}>) => {
   };
   return (
     <Panel.Wrapper>
-      <Panel.Title>{Contexts.World.selected?.name}</Panel.Title>
+      <Panel.Title>{Contexts.World.selected?.Name}</Panel.Title>
       <Panel.Section>
         <Panel.Title2>Aktualnie monitoruje:</Panel.Title2>
         <span>{Contexts.Tribe.tribes.length} plemion</span>

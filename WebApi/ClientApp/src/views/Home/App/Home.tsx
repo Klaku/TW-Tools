@@ -19,10 +19,10 @@ const Home = (props: PropsWithChildren<{}>) => {
               <DefaultButton
                 onClick={() => {
                   setSelectedWorld(x);
-                  navigate(x.subDomain);
+                  navigate(x.SubDomain);
                 }}
-                key={x.id}>
-                {x.name}
+                key={x.Id}>
+                {x.Name}
               </DefaultButton>
             );
           })}

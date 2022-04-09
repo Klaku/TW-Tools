@@ -24,7 +24,7 @@ export const TribeContextWrapper = (props: PropsWithChildren<{}>) => {
   const fetchTribes = () => {
     if (context.selected != null) {
       setFetching(true);
-      fetch(`/api/Tribe/GetTribes?worldId=${context.selected?.id}`)
+      fetch(`/api/Tribe/GetTribes?worldId=${context.selected?.Id}`)
         .then((response) => response.json())
         .then((data: Tribe[]) => {
           setTribes(data);

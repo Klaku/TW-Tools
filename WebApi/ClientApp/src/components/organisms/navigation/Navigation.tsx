@@ -12,30 +12,28 @@ const Navigation = (props: PropsWithChildren<{}>) => {
       </Styled.Container>
       {selected != null ? (
         <Styled.Links_Container>
-          <Styled.NavigationLink to={`/${selected.subDomain}`}>
+          <Styled.NavigationLink to={`/${selected.SubDomain}`}>
             <Styled.Item>Informacje</Styled.Item>
           </Styled.NavigationLink>
-          <Styled.NavigationLink to={`/${selected.subDomain}/rank`}>
+          <Styled.NavigationLink to={`/${selected.SubDomain}/rank`}>
             <Styled.Item>Ranking</Styled.Item>
           </Styled.NavigationLink>
-          <Styled.NavigationLink to={`/${selected.subDomain}/map`}>
+          <Styled.NavigationLink to={`/${selected.SubDomain}/map`}>
             <Styled.Item>Mapa</Styled.Item>
           </Styled.NavigationLink>
           <Styled.NavigationLink to={'/foo'}>
             <Styled.Item>404 level 1</Styled.Item>
           </Styled.NavigationLink>
-          <Styled.NavigationLink to={`/${selected.subDomain}/foo`}>
+          <Styled.NavigationLink to={`/${selected.SubDomain}/foo`}>
             <Styled.Item>404 level 2</Styled.Item>
           </Styled.NavigationLink>
         </Styled.Links_Container>
       ) : (
         <Styled.Links_Container>
-          {list.map((x) => {
-            return (
-              <Styled.NavigationLink key={x.id} to={`/${x.subDomain}`}>
-                <Styled.Item>{x.name}</Styled.Item>
+          {list.length > 0 && list.map((x) => {
+            return <Styled.NavigationLink key={x.Id} to={`/${x.SubDomain}`}>
+                <Styled.Item>{x.Name}</Styled.Item>
               </Styled.NavigationLink>
-            );
           })}
         </Styled.Links_Container>
       )}

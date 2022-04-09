@@ -6,6 +6,7 @@ import { initializeIcons } from '@fluentui/react/lib/Icons';
 import { WorldContextWrapper } from 'contexts/WorldContext';
 import { TribeContextWrapper } from 'contexts/TribeContext';
 import { PlayerContextWrapper } from 'contexts/PlayerContext';
+import { VillageContextWrapper } from 'contexts/VillageContext';
 const provider = (props: PropsWithChildren<{}>) => {
   initializeIcons();
   return (
@@ -13,7 +14,9 @@ const provider = (props: PropsWithChildren<{}>) => {
       <WorldContextWrapper>
         <TribeContextWrapper>
           <PlayerContextWrapper>
-            <BrowserRouter>{props.children}</BrowserRouter>
+            <VillageContextWrapper>
+              <BrowserRouter>{props.children}</BrowserRouter>
+            </VillageContextWrapper>
           </PlayerContextWrapper>
         </TribeContextWrapper>
       </WorldContextWrapper>

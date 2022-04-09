@@ -7,7 +7,7 @@ import World from 'components/templates/World/WorldWrapper';
 import Home from 'views/Home/App/Home';
 import NotFound from 'views/NotFound/NotFound';
 import { WorldContext } from 'contexts/WorldContext';
-import Map from 'views/Map/Map';
+import MapView from 'views/Map/MapView';
 import { Spinner } from '@fluentui/react';
 import WorldHome from 'views/Home/World/Home';
 import Ranking from 'views/Ranking/Ranking';
@@ -45,7 +45,7 @@ const Main = (props: PropsWithChildren<{}>) => {
                   </Route>
                 </Route>
               </Route>
-              <Route path="map" element={<Map />} />
+              <Route path="map" element={<MapView />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>

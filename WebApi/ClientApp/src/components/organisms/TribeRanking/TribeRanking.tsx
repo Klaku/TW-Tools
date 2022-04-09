@@ -17,9 +17,9 @@ const TribeRanking = (props: PropsWithChildren<{ filter: string }>) => {
   const navigate = useNavigate();
   const redirect = (key: string) => {
     if (sort == key && method != 'desc') {
-      navigate(`/${Contexts.World.selected?.subDomain}/rank/tribe/${key}/desc`);
+      navigate(`/${Contexts.World.selected?.SubDomain}/rank/tribe/${key}/desc`);
     } else {
-      navigate(`/${Contexts.World.selected?.subDomain}/rank/tribe/${key}/asc`);
+      navigate(`/${Contexts.World.selected?.SubDomain}/rank/tribe/${key}/asc`);
     }
   };
   const keySort = (a: Tribe, b: Tribe) => {
@@ -27,42 +27,42 @@ const TribeRanking = (props: PropsWithChildren<{ filter: string }>) => {
     switch (sort) {
       case 'nr':
       case 'points':
-        c = a.points;
-        d = b.points;
+        c = a.Points;
+        d = b.Points;
         break;
       case 'tag':
-        c = a.tag;
-        d = b.tag;
+        c = a.Tag;
+        d = b.Tag;
         break;
       case 'name':
-        c = a.name;
-        d = b.name;
+        c = a.Name;
+        d = b.Name;
         break;
       case 'villages':
-        c = a.villages;
-        d = b.villages;
+        c = a.Villages;
+        d = b.Villages;
         break;
       case 'ra':
-        c = a.ra;
-        d = b.ra;
+        c = a.RA;
+        d = b.RA;
         break;
       case 'ro':
-        c = a.ro;
-        d = b.ro;
+        c = a.RO;
+        d = b.RO;
         break;
       case 'rs':
-        c = a.rs;
-        d = b.rs;
+        c = a.RS;
+        d = b.RS;
         break;
       default:
-        d = a.ranking;
-        c = b.ranking;
+        d = a.Ranking;
+        c = b.Ranking;
         break;
     }
     return (c < d ? -1 : 1) * (method == 'desc' ? 1 : -1);
   };
   const VisibleTribes = Contexts.Tribe.tribes.filter(
-    (x) => x.name.toLocaleLowerCase().indexOf(props.filter.toLowerCase()) != -1 || x.tag.toLocaleLowerCase().indexOf(props.filter.toLowerCase()) != -1
+    (x) => x.Name.toLocaleLowerCase().indexOf(props.filter.toLowerCase()) != -1 || x.Tag.toLocaleLowerCase().indexOf(props.filter.toLowerCase()) != -1
   );
   return (
     <Panel.Section>
@@ -128,41 +128,41 @@ const TribeRanking = (props: PropsWithChildren<{ filter: string }>) => {
           <ExpandContainer></ExpandContainer>
         </HeaderRow>
         {VisibleTribes.sort(keySort).map((tribe) => {
-          return <ListItemComponent key={tribe.id} tribe={tribe} />;
+          return <ListItemComponent key={tribe.Id} tribe={tribe} />;
         })}
         {props.filter.length > 1 && (
           <ListItemComponent
             tribe={
               {
-                id: 0,
-                worldId: 0,
-                tribeId: VisibleTribes[0].tribeId,
-                name: 'Sumarycznie',
-                tag: '',
-                ra: VisibleTribes.map((x) => x.ra).reduce((a, b) => a + b),
-                villages: VisibleTribes.map((x) => x.villages).reduce((a, b) => a + b),
-                villages7: VisibleTribes.map((x) => x.villages7).reduce((a, b) => a + b),
-                villages24: VisibleTribes.map((x) => x.villages24).reduce((a, b) => a + b),
-                villages30: VisibleTribes.map((x) => x.villages30).reduce((a, b) => a + b),
-                points: VisibleTribes.map((x) => x.points).reduce((a, b) => a + b),
-                points7: VisibleTribes.map((x) => x.points7).reduce((a, b) => a + b),
-                points24: VisibleTribes.map((x) => x.points24).reduce((a, b) => a + b),
-                points30: VisibleTribes.map((x) => x.points30).reduce((a, b) => a + b),
-                rA7: VisibleTribes.map((x) => x.rA7).reduce((a, b) => a + b),
-                rA24: VisibleTribes.map((x) => x.rA24).reduce((a, b) => a + b),
-                rA30: VisibleTribes.map((x) => x.rA30).reduce((a, b) => a + b),
-                ro: VisibleTribes.map((x) => x.ro).reduce((a, b) => a + b),
-                rO7: VisibleTribes.map((x) => x.rO7).reduce((a, b) => a + b),
-                rO24: VisibleTribes.map((x) => x.rO24).reduce((a, b) => a + b),
-                rO30: VisibleTribes.map((x) => x.rO30).reduce((a, b) => a + b),
-                rs: VisibleTribes.map((x) => x.rs).reduce((a, b) => a + b),
-                rS7: VisibleTribes.map((x) => x.rS7).reduce((a, b) => a + b),
-                rS24: VisibleTribes.map((x) => x.rS24).reduce((a, b) => a + b),
-                rS30: VisibleTribes.map((x) => x.rS30).reduce((a, b) => a + b),
-                ranking: VisibleTribes.map((x) => x.ranking).reduce((a, b) => a + b),
-                ranking7: VisibleTribes.map((x) => x.ranking7).reduce((a, b) => a + b),
-                ranking24: VisibleTribes.map((x) => x.ranking24).reduce((a, b) => a + b),
-                ranking30: VisibleTribes.map((x) => x.ranking30).reduce((a, b) => a + b),
+                Id: 0,
+                WorldId: 0,
+                TribeId: VisibleTribes[0].TribeId,
+                Name: 'Sumarycznie',
+                Tag: '',
+                RA: VisibleTribes.map((x) => x.RA).reduce((a, b) => a + b),
+                Villages: VisibleTribes.map((x) => x.Villages).reduce((a, b) => a + b),
+                Villages7: VisibleTribes.map((x) => x.Villages7).reduce((a, b) => a + b),
+                Villages24: VisibleTribes.map((x) => x.Villages24).reduce((a, b) => a + b),
+                Villages30: VisibleTribes.map((x) => x.Villages30).reduce((a, b) => a + b),
+                Points: VisibleTribes.map((x) => x.Points).reduce((a, b) => a + b),
+                Points7: VisibleTribes.map((x) => x.Points7).reduce((a, b) => a + b),
+                Points24: VisibleTribes.map((x) => x.Points24).reduce((a, b) => a + b),
+                Points30: VisibleTribes.map((x) => x.Points30).reduce((a, b) => a + b),
+                RA7: VisibleTribes.map((x) => x.RA7).reduce((a, b) => a + b),
+                RA24: VisibleTribes.map((x) => x.RA24).reduce((a, b) => a + b),
+                RA30: VisibleTribes.map((x) => x.RA30).reduce((a, b) => a + b),
+                RO: VisibleTribes.map((x) => x.RO).reduce((a, b) => a + b),
+                RO7: VisibleTribes.map((x) => x.RO7).reduce((a, b) => a + b),
+                RO24: VisibleTribes.map((x) => x.RO24).reduce((a, b) => a + b),
+                RO30: VisibleTribes.map((x) => x.RO30).reduce((a, b) => a + b),
+                RS: VisibleTribes.map((x) => x.RS).reduce((a, b) => a + b),
+                RS7: VisibleTribes.map((x) => x.RS7).reduce((a, b) => a + b),
+                RS24: VisibleTribes.map((x) => x.RS24).reduce((a, b) => a + b),
+                RS30: VisibleTribes.map((x) => x.RS30).reduce((a, b) => a + b),
+                Ranking: VisibleTribes.map((x) => x.Ranking).reduce((a, b) => a + b),
+                Ranking7: VisibleTribes.map((x) => x.Ranking7).reduce((a, b) => a + b),
+                Ranking24: VisibleTribes.map((x) => x.Ranking24).reduce((a, b) => a + b),
+                Ranking30: VisibleTribes.map((x) => x.Ranking30).reduce((a, b) => a + b),
               } as Tribe
             }
           />
@@ -214,23 +214,23 @@ const ListItemComponent = (props: PropsWithChildren<{ tribe: Tribe }>) => {
   return (
     <Item>
       <HeaderRow>
-        <Col style={{ width: 25 }}>{tribe.ranking}</Col>
-        <Col style={{ width: 60 }}>{tribe.tag}</Col>
-        <Col style={{ minWidth: 50, flexGrow: 1 }}>{tribe.name}</Col>
+        <Col style={{ width: 25 }}>{tribe.Ranking}</Col>
+        <Col style={{ width: 60 }}>{tribe.Tag}</Col>
+        <Col style={{ minWidth: 50, flexGrow: 1 }}>{tribe.Name}</Col>
         <Col style={{ width: 100 }}>
-          <ValueColor value={tribe.points - tribe.points24}>{Number(tribe.points).toLocaleString('de')}</ValueColor>
+          <ValueColor value={tribe.Points - tribe.Points24}>{Number(tribe.Points).toLocaleString('de')}</ValueColor>
         </Col>
         <Col style={{ width: 60 }}>
-          <ValueColor value={tribe.villages - tribe.villages24}>{Number(tribe.villages).toLocaleString('de')}</ValueColor>
+          <ValueColor value={tribe.Villages - tribe.Villages24}>{Number(tribe.Villages).toLocaleString('de')}</ValueColor>
         </Col>
         <Col style={{ width: 100 }}>
-          <ValueColor value={tribe.ra - tribe.rA24}>{Number(tribe.ra).toLocaleString('de')}</ValueColor>
+          <ValueColor value={tribe.RA - tribe.RA24}>{Number(tribe.RA).toLocaleString('de')}</ValueColor>
         </Col>
         <Col style={{ width: 100 }}>
-          <ValueColor value={tribe.ro - tribe.rO24}>{Number(tribe.ro).toLocaleString('de')}</ValueColor>
+          <ValueColor value={tribe.RO - tribe.RO24}>{Number(tribe.RO).toLocaleString('de')}</ValueColor>
         </Col>
         <Col style={{ width: 100 }}>
-          <ValueColor value={tribe.rs - tribe.rS24}>{Number(tribe.rs).toLocaleString('de')}</ValueColor>
+          <ValueColor value={tribe.RS - tribe.RS24}>{Number(tribe.RS).toLocaleString('de')}</ValueColor>
         </Col>
         {isCollapsed ? (
           <ExpandContainer
@@ -260,12 +260,12 @@ const ListItemComponent = (props: PropsWithChildren<{ tribe: Tribe }>) => {
             <DataItem>30dni</DataItem>
             <ExpandContainer></ExpandContainer>
           </DataRow>
-          {tribe.id != 0 && RowData('Ranking', tribe.ranking, tribe.ranking24, tribe.ranking7, tribe.ranking30)}
-          {RowData('Liczba Punktów', tribe.points, tribe.points24, tribe.points7, tribe.points30)}
-          {RowData('Liczba Wiosek', tribe.villages, tribe.villages24, tribe.villages7, tribe.villages30)}
-          {RowData('Pokonani w Ataku', tribe.ra, tribe.rA24, tribe.rA7, tribe.rA30)}
-          {RowData('Pokonani w Obronie', tribe.ro, tribe.rO24, tribe.rO7, tribe.rO30)}
-          {RowData('Pokonani Razem', tribe.rs, tribe.rS24, tribe.rS7, tribe.rS30)}
+          {tribe.Id != 0 && RowData('Ranking', tribe.Ranking, tribe.Ranking24, tribe.Ranking7, tribe.Ranking30)}
+          {RowData('Liczba Punktów', tribe.Points, tribe.Points24, tribe.Points7, tribe.Points30)}
+          {RowData('Liczba Wiosek', tribe.Villages, tribe.Villages24, tribe.Villages7, tribe.Villages30)}
+          {RowData('Pokonani w Ataku', tribe.RA, tribe.RA24, tribe.RA7, tribe.RA30)}
+          {RowData('Pokonani w Obronie', tribe.RO, tribe.RO24, tribe.RO7, tribe.RO30)}
+          {RowData('Pokonani Razem', tribe.RS, tribe.RS24, tribe.RS7, tribe.RS30)}
         </DataContainer>
       )}
     </Item>

@@ -20,13 +20,13 @@ const Ranking = (props: PropsWithChildren<{}>) => {
           <DefaultButton
             text="Plemiona"
             onClick={() => {
-              navigate(`/${Contexts.World.selected?.subDomain}/rank/tribe${sort ? `/${sort}${method ? `/${method}` : ''}` : ''}`);
+              navigate(`/${Contexts.World.selected?.SubDomain}/rank/tribe${sort ? `/${sort}${method ? `/${method}` : ''}` : ''}`);
             }}
           />
           <DefaultButton
             text="Gracze"
             onClick={() => {
-              navigate(`/${Contexts.World.selected?.subDomain}/rank/player${sort ? `/${sort}${method ? `/${method}` : ''}` : ''}`);
+              navigate(`/${Contexts.World.selected?.SubDomain}/rank/player${sort ? `/${sort}${method ? `/${method}` : ''}` : ''}`);
             }}
           />
           <TextField
