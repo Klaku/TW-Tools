@@ -12,12 +12,12 @@ namespace CoreApi.Models.DB
     {
         public CustomContext(DbContextOptions<CustomContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Village> Village { get; set; }
         public DbSet<VillageHistory> VillageHistory { get; set; }
-        public DbSet<VillageCurrent> VillageCurrent { get; set;}
+        public DbSet<VillageCurrent> VillageCurrent { get; set; }
         public DbSet<Player> Player { get; set; }
         public DbSet<PlayerHistory> PlayerHistory { get; set; }
         public DbSet<PlayerCurrent> PlayerCurrents { get; set; }
@@ -31,14 +31,14 @@ namespace CoreApi.Models.DB
             modelBuilder.Entity<Player>()
                 .HasKey(o => new { o.Id, o.WorldId });
             modelBuilder.Entity<Tribe>()
-                .HasKey(o => new {o.Id, o.WorldId});
+                .HasKey(o => new { o.Id, o.WorldId });
             modelBuilder.Entity<Village>()
                 .HasKey(o => new { o.Id, o.WorldId });
         }
 
     }
 
-    
+
 
     public class CustomContextFactory : IDesignTimeDbContextFactory<CustomContext>
     {
@@ -75,7 +75,7 @@ namespace CoreApi.Models.DB
 
         public enum ConnectionStrings
         {
-            AzureDatabase =0,
+            AzureDatabase = 0,
             LocalDatabase = 1,
             LocalHangfireDatabase = 2
         }

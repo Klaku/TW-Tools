@@ -21,20 +21,17 @@ const Navigation = (props: PropsWithChildren<{}>) => {
           <Styled.NavigationLink to={`/${selected.SubDomain}/map`}>
             <Styled.Item>Mapa</Styled.Item>
           </Styled.NavigationLink>
-          <Styled.NavigationLink to={'/foo'}>
-            <Styled.Item>404 level 1</Styled.Item>
-          </Styled.NavigationLink>
-          <Styled.NavigationLink to={`/${selected.SubDomain}/foo`}>
-            <Styled.Item>404 level 2</Styled.Item>
-          </Styled.NavigationLink>
         </Styled.Links_Container>
       ) : (
         <Styled.Links_Container>
-          {list.length > 0 && list.map((x) => {
-            return <Styled.NavigationLink key={x.Id} to={`/${x.SubDomain}`}>
-                <Styled.Item>{x.Name}</Styled.Item>
-              </Styled.NavigationLink>
-          })}
+          {list.length > 0 &&
+            list.map((x) => {
+              return (
+                <Styled.NavigationLink key={x.Id} to={`/${x.SubDomain}`}>
+                  <Styled.Item>{x.Name}</Styled.Item>
+                </Styled.NavigationLink>
+              );
+            })}
         </Styled.Links_Container>
       )}
     </Styled.Navigation_Container>

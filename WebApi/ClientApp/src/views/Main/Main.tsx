@@ -11,6 +11,7 @@ import MapView from 'views/Map/MapView';
 import { Spinner } from '@fluentui/react';
 import WorldHome from 'views/Home/World/Home';
 import Ranking from 'views/Ranking/Ranking';
+import Plener from 'views/Plener/Plener';
 const Main = (props: PropsWithChildren<{}>) => {
   const Context = {
     World: useContext(WorldContext),
@@ -45,6 +46,7 @@ const Main = (props: PropsWithChildren<{}>) => {
                   </Route>
                 </Route>
               </Route>
+              <Route path="plener" element={<Plener />} />
               <Route path="map" element={<MapView />} />
               <Route path="*" element={<NotFound />} />
             </Route>
