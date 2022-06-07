@@ -28,4 +28,4 @@ export type Tribe = {
   Ranking7: number;
   Ranking24: number;
   Ranking30: number;
-}
+};

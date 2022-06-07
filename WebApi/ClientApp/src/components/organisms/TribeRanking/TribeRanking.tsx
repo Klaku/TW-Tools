@@ -256,8 +256,8 @@ const ListItemComponent = (props: PropsWithChildren<{ tribe: Tribe }>) => {
             <DataItem style={{ minWidth: 150 }}>Właściwość</DataItem>
             <DataItem>Aktualnie</DataItem>
             <DataItem>24 godziny</DataItem>
+            <DataItem>3 dni</DataItem>
             <DataItem>7 dni</DataItem>
-            <DataItem>30dni</DataItem>
             <ExpandContainer></ExpandContainer>
           </DataRow>
           {tribe.Id != 0 && RowData('Ranking', tribe.Ranking, tribe.Ranking24, tribe.Ranking7, tribe.Ranking30)}

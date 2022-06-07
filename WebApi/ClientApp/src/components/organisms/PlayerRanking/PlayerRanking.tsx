@@ -210,8 +210,8 @@ const ListItemComponent = (props: PropsWithChildren<{ player: Player }>) => {
             <DataItem style={{ minWidth: 150 }}>Właściwość</DataItem>
             <DataItem>Aktualnie</DataItem>
             <DataItem>24 godziny</DataItem>
+            <DataItem>3 dni</DataItem>
             <DataItem>7 dni</DataItem>
-            <DataItem>30dni</DataItem>
             <ExpandContainer></ExpandContainer>
           </DataRow>
           {RowData('Ranking', player.Ranking, player.Ranking24, player.Ranking7, player.Ranking30)}

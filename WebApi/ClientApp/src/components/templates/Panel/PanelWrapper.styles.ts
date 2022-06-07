@@ -53,8 +53,8 @@ export const Section = styled.div`
 `;
 
 export const SectionRow = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: row;
   width: 100%;
   gap: 10px;
-`
+`;
