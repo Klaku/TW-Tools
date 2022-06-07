@@ -143,7 +143,7 @@ namespace CoreApi.Tasks
                             Thread t = new Thread(() => task.Start());
                             t.Start();
                             threads.Add(t);
-                            if ((i + 1) % 20 == 0)
+                            if(threads.Count > 20)
                             {
                                 threads.ForEach(thread => thread.Join());
                                 threads.Clear();

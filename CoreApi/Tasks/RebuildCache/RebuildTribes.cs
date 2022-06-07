@@ -42,11 +42,11 @@ namespace CoreApi.Tasks
                     .FirstOrDefault();
                     TribeHistory tribeHistory7 = _db.TribeHistory
                     .OrderByDescending(x => x.Created)
-                    .Where(x => x.TribeId == tribe.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7))
+                    .Where(x => x.TribeId == tribe.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-3))
                     .FirstOrDefault();
                     TribeHistory tribeHistory30 = _db.TribeHistory
                     .OrderByDescending(x => x.Created)
-                    .Where(x => x.TribeId == tribe.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-30))
+                    .Where(x => x.TribeId == tribe.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7))
                     .FirstOrDefault();
                     if (tribeHistory != null)
                     {

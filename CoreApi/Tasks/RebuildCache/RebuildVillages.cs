@@ -29,6 +29,7 @@ namespace CoreApi.Tasks
             using (MonitoredScope scope = new MonitoredScope($"Miner.RebuildCache.World[{_world.SubDomain}].Villages[{_index}]", _logger))
             {
                 List<VillageCurrent> currentVillages = new List<VillageCurrent>();
+                scope.Debug($"Rebuilding {_villages.Count} items");
                 _villages.ForEach(village =>
                 {
                     try
@@ -43,11 +44,11 @@ namespace CoreApi.Tasks
                         .FirstOrDefault();
                         VillageHistory villageHistory7 = _db.VillageHistory
                         .OrderByDescending(x => x.Created)
-                        .Where(x => x.VillageId == village.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7))
+                        .Where(x => x.VillageId == village.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-3))
                         .FirstOrDefault();
                         VillageHistory villageHistory30 = _db.VillageHistory
                         .OrderByDescending(x => x.Created)
-                        .Where(x => x.VillageId == village.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-30))
+                        .Where(x => x.VillageId == village.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7))
                         .FirstOrDefault();
                         var CurrentOwner = _db.PlayerCurrents.FirstOrDefault(x => x.PlayerId == villageHistory.PlayerId);
                         if (villageHistory != null)
@@ -73,6 +74,7 @@ namespace CoreApi.Tasks
                     }
                     catch (Exception exc)
                     {
+                        scope.Error(exc.ToString());
                         scope.Error(exc.Message);
                         if(exc.InnerException != null)
                         {
