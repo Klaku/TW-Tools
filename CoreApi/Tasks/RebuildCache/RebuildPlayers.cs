@@ -29,51 +29,57 @@ namespace CoreApi.Tasks
             using(MonitoredScope scope = new MonitoredScope($"Miner.RebuildCache.World[{_world.SubDomain}].Players[{_index}]", _logger))
             {
                 List<PlayerCurrent> currentPlayers = new List<PlayerCurrent>();
+                scope.Debug($"Preparing {_players.Count} players");
                 _players.ForEach(player =>
                 {
-                    PlayerHistory playerHistory = _db.PlayerHistory.OrderByDescending(x => x.Created).Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id).FirstOrDefault();
-                    PlayerHistory playerHistory24 = _db.PlayerHistory.OrderByDescending(x => x.Created).Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-1)).FirstOrDefault();
-                    PlayerHistory playerHistory7 = _db.PlayerHistory.OrderByDescending(x => x.Created).Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7)).FirstOrDefault();
-                    PlayerHistory playerHistory30 = _db.PlayerHistory.OrderByDescending(x => x.Created).Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-30)).FirstOrDefault();
-                    if (playerHistory != null)
+                    try
                     {
-                        currentPlayers.Add(new PlayerCurrent()
+                        PlayerHistory playerHistory = _db.PlayerHistory.Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id).OrderByDescending(x => x.Created).FirstOrDefault();
+                        PlayerHistory playerHistory24 = _db.PlayerHistory.Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-1)).OrderByDescending(x => x.Created).FirstOrDefault();
+                        PlayerHistory playerHistory7 = _db.PlayerHistory.Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-3)).OrderByDescending(x => x.Created).FirstOrDefault();
+                        PlayerHistory playerHistory30 = _db.PlayerHistory.Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7)).OrderByDescending(x => x.Created).FirstOrDefault();
+                        if (playerHistory != null)
                         {
-                            PlayerId = player.Id,
-                            TribeId = playerHistory.TribeId,
-                            WorldId = _world.Id,
-                            Name = player.Name,
-                            Points = playerHistory.Points,
-                            Points24 = playerHistory24 == null ? -1 : playerHistory24.Points,
-                            Points7 = playerHistory7 == null ? -1 : playerHistory7.Points,
-                            Points30 = playerHistory30 == null ? -1 : playerHistory30.Points,
-                            VillagesCount = playerHistory.VillagesCount,
-                            VillagesCount24 = playerHistory24 == null ? -1 : playerHistory24.VillagesCount,
-                            VillagesCount7 = playerHistory7 == null ? -1 : playerHistory7.VillagesCount,
-                            VillagesCount30 = playerHistory30 == null ? -1 : playerHistory30.VillagesCount,
-                            Ranking = playerHistory.Ranking,
-                            Ranking24 = playerHistory24 == null ? -1 : playerHistory24.Ranking,
-                            Ranking7 = playerHistory7 == null ? -1 : playerHistory7.Ranking,
-                            Ranking30 = playerHistory30 == null ? -1 : playerHistory30.Ranking,
-                            RA = playerHistory.RA,
-                            RA24 = playerHistory24 == null ? -1 : playerHistory24.RA,
-                            RA7 = playerHistory7 == null ? -1 : playerHistory7.RA,
-                            RA30 = playerHistory30 == null ? -1 : playerHistory30.RA,
-                            RO = playerHistory.RO,
-                            RO24 = playerHistory24 == null ? -1 : playerHistory24.RO,
-                            RO7 = playerHistory7 == null ? -1 : playerHistory7.RO,
-                            RO30 = playerHistory30 == null ? -1 : playerHistory30.RO,
-                            RS = playerHistory.RS,
-                            RS24 = playerHistory24 == null ? -1 : playerHistory24.RS,
-                            RS7 = playerHistory7 == null ? -1 : playerHistory7.RS,
-                            RS30 = playerHistory30 == null ? -1 : playerHistory30.RS,
-                        });
-                    }
-                    else
+                            currentPlayers.Add(new PlayerCurrent()
+                            {
+                                PlayerId = player.Id,
+                                TribeId = playerHistory.TribeId,
+                                WorldId = _world.Id,
+                                Name = player.Name,
+                                Points = playerHistory.Points,
+                                Points24 = playerHistory24 == null ? -1 : playerHistory24.Points,
+                                Points7 = playerHistory7 == null ? -1 : playerHistory7.Points,
+                                Points30 = playerHistory30 == null ? -1 : playerHistory30.Points,
+                                VillagesCount = playerHistory.VillagesCount,
+                                VillagesCount24 = playerHistory24 == null ? -1 : playerHistory24.VillagesCount,
+                                VillagesCount7 = playerHistory7 == null ? -1 : playerHistory7.VillagesCount,
+                                VillagesCount30 = playerHistory30 == null ? -1 : playerHistory30.VillagesCount,
+                                Ranking = playerHistory.Ranking,
+                                Ranking24 = playerHistory24 == null ? -1 : playerHistory24.Ranking,
+                                Ranking7 = playerHistory7 == null ? -1 : playerHistory7.Ranking,
+                                Ranking30 = playerHistory30 == null ? -1 : playerHistory30.Ranking,
+                                RA = playerHistory.RA,
+                                RA24 = playerHistory24 == null ? -1 : playerHistory24.RA,
+                                RA7 = playerHistory7 == null ? -1 : playerHistory7.RA,
+                                RA30 = playerHistory30 == null ? -1 : playerHistory30.RA,
+                                RO = playerHistory.RO,
+                                RO24 = playerHistory24 == null ? -1 : playerHistory24.RO,
+                                RO7 = playerHistory7 == null ? -1 : playerHistory7.RO,
+                                RO30 = playerHistory30 == null ? -1 : playerHistory30.RO,
+                                RS = playerHistory.RS,
+                                RS24 = playerHistory24 == null ? -1 : playerHistory24.RS,
+                                RS7 = playerHistory7 == null ? -1 : playerHistory7.RS,
+                                RS30 = playerHistory30 == null ? -1 : playerHistory30.RS,
+                            });
+                        }
+                        else
+                        {
+                            scope.Error($"History for player {player.Id} - {player.Name} not found");
+                        }
+                    }catch(Exception e)
                     {
-                        scope.Error($"History for player {player.Id} - {player.Name} not found");
+                        scope.Error(e.ToString());
                     }
-
                 });
                 scope.Debug($"Mapped {_players.Count} Players");
 

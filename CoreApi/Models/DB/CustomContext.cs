@@ -47,11 +47,11 @@ namespace CoreApi.Models.DB
             var optionsBuilder = new DbContextOptionsBuilder<CustomContext>();
             if (args.Length > 0)
             {
-                optionsBuilder.UseSqlServer(args[0]);
+                optionsBuilder.UseSqlServer(args[0], opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(2).TotalSeconds));
             }
             else
             {
-                optionsBuilder.UseSqlServer(ContextOf(ConnectionStrings.AzureDatabase)[0]);
+                optionsBuilder.UseSqlServer(ContextOf(ConnectionStrings.AzureDatabase)[0], opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(2).TotalSeconds));
             }
 
 
