@@ -102,12 +102,17 @@ namespace CoreApi.Tasks
                             {
                                 try
                                 {
+                                    //Pobranie 1000 elementów starszych niż 8 dni
                                     var History = _db.VillageHistory.Where(x => x.Created < DateTime.Today.AddDays(-8)).Take(1000);
+                                    //Sprawdzenie czy zwrócony został przynajmniej jeden
                                     if(History.Count() < 1)
                                     {
+                                        // W przypadku gdy baza danych nie zawiera wystarczająco przestarzałych elementów przerwanie pętli. 
                                         break;
                                     }
+                                    // Usuwanie pobranych elementów 
                                     _db.VillageHistory.RemoveRange(History);
+                                    //Zapisanie zmian
                                     _db.SaveChanges();
                                     scope.Debug("Removed <1000 items");
                                 }

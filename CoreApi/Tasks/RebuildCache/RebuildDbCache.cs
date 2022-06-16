@@ -66,27 +66,26 @@ namespace CoreApi.Tasks
                     try
                     {
                         List<Player> players = new List<Player>();
-                        players = _db.Player.Where(x => x.WorldId == _world.Id && x.Active == true).ToList();
+                        players = _db.Player.Where(x => x.WorldId == _world.Id && x.Active == true).ToList(); //Pobranie aktywnych graczy
                         subScope.Debug($"Received {players.Count} Players");
                         List<Thread> threads = new List<Thread>();
-                        int page_size = 150;
-                        int paged = (int)Math.Ceiling((double)players.Count / page_size);
-                        for (var i = 0; i < paged; i++)
+                        int page_size = 150; // Ustalenie rozmiaru grupy
+                        int paged = (int)Math.Ceiling((double)players.Count / page_size); // ustalenie liczby grup
+                        for (var i = 0; i < paged; i++) // iteracja po liczbie grup
                         {
-                            var range = players.GetRange(i * page_size, Math.Min(page_size, players.Count - (i * page_size)));
-                            RebuildPlayers task = new RebuildPlayers(range,_logger, _world, i);
-                            Thread t = new Thread(() => task.Start());
-                            t.Start();
-                            threads.Add(t);
-                            if((i+1) %20 == 0)
+                            var range = players.GetRange(i * page_size, Math.Min(page_size, players.Count - (i * page_size))); // Pobranie do 150 elementów
+                            RebuildPlayers task = new RebuildPlayers(range,_logger, _world, i); //Utworzenie obiektu klasy tworzącej obiekty current
+                            Thread t = new Thread(() => task.Start()); // Inicjalizacja obiektu wątku 
+                            t.Start(); // Uruchomienie wątku
+                            threads.Add(t); // Przechowanie referencji wątku
+                            if((i+1) %20 == 0) // Ograniczenie do 20 wątków jednocześnie 
                             {
-                                threads.ForEach(thread => thread.Join());
-                                threads.Clear();
+                                threads.ForEach(thread => thread.Join()); // Oczekiwanie na zakończenie wszystkich wątków 
+                                threads.Clear(); // Wyczyszczenie tablicy przechowywujących wątki
                             }
                         }
-                        threads.ForEach(thread => thread.Join());
+                        threads.ForEach(thread => thread.Join()); // Uruchomienie wątków które pozostały na liście po iteracji
                         subScope.Debug("Threads joined");
-
                     }
                     catch (Exception ex)
                     {

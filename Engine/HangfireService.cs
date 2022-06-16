@@ -14,13 +14,18 @@ namespace Engine
 
         public HangfireService()
         {
+            //Konfiguracja serwera
             GlobalConfiguration.Configuration.UseSqlServerStorage(CustomContextFactory.ContextOf(CustomContextFactory.ConnectionStrings.LocalHangfireDatabase)[0]);
+            //Utworzenie instancji serwera
             _server = new BackgroundJobServer();
         }
 
         public void Reinstall()
         {
+            //Utworzenie instancji klasy DataMiner
             DataMiner miner = new DataMiner();
+            //Dodanie lub aktualizacja funkcji z kluczem "Get Data" 
+            //Oraz ustalenie interwału wykonywania na piątą minutę każdej z godzin podzielnych przez 4
             RecurringJob.AddOrUpdate("Get Data", () => miner.Process(), "5 */4 * * *");
         }
 

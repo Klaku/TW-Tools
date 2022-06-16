@@ -20,16 +20,16 @@ namespace WebApi.Controllers
         [HttpGet]
         public List<PlayerCurrent> GetPlayers(int worldId)
         {
-            string cacheKey = $"Players[{worldId}]";
-            if (!_memoryCache.TryGetValue(cacheKey, out List<PlayerCurrent> cacheValue))
+            string cacheKey = $"Players[{worldId}]"; // Budowa klucza
+            if (!_memoryCache.TryGetValue(cacheKey, out List<PlayerCurrent> cacheValue)) //Próba otrzymania wartości
             {
-                cacheValue = new PlayerService().GetPlayers(worldId);
-                var options = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(30));
+                cacheValue = new PlayerService().GetPlayers(worldId); // Wykonanie zapytania do bazy danych
+                var options = new MemoryCacheEntryOptions() //Inicjalizacja obiektu właściwości pamięci podręcznej
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(30)); // Ustawienie czasu wygaśnięcia klucza na okres 30 minut
 
-                _memoryCache.Set(cacheKey, cacheValue, options);
+                _memoryCache.Set(cacheKey, cacheValue, options); // Ustawienie wartości klucza 
             }
-            return cacheValue;
+            return cacheValue; // Zwrócenie zawartości użytkownikowi
         }
     }
 }

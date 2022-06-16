@@ -24,12 +24,12 @@ namespace CoreApi.Helpers
 
         public void StartScope(string name, Logger logger)
         {
-            ThreadId = Thread.CurrentThread.ManagedThreadId;
-            _stopWatch = new Stopwatch();
-            _name = name;
-            _stopWatch.Start();
-            _logger = logger;
-            Debug("Started");
+            ThreadId = Thread.CurrentThread.ManagedThreadId; //Pobranie informacji o identyfikatorze wątku
+            _stopWatch = new Stopwatch(); //Inicjacja stopera
+            _name = name; //Pobranie nazwy aktualnie uruchomionego obszaru
+            _stopWatch.Start(); //Uruchomienie stopera
+            _logger = logger; //Przypisanie obiektu klasy Logger
+            Debug("Started"); // Wpis do pliku z logami o rozpoczęciu działania w ramach bloku kodu
         }
 
         public void Info(string message)

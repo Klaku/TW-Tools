@@ -34,12 +34,27 @@ namespace CoreApi.Tasks
                 {
                     try
                     {
-                        PlayerHistory playerHistory = _db.PlayerHistory.Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id).OrderByDescending(x => x.Created).FirstOrDefault();
-                        PlayerHistory playerHistory24 = _db.PlayerHistory.Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-1)).OrderByDescending(x => x.Created).FirstOrDefault();
-                        PlayerHistory playerHistory7 = _db.PlayerHistory.Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-3)).OrderByDescending(x => x.Created).FirstOrDefault();
-                        PlayerHistory playerHistory30 = _db.PlayerHistory.Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7)).OrderByDescending(x => x.Created).FirstOrDefault();
+                        //Pobranie danych archiwalnych
+                        PlayerHistory playerHistory = _db.PlayerHistory
+                            .Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id)
+                            .OrderByDescending(x => x.Created)
+                            .FirstOrDefault();
+                        PlayerHistory playerHistory24 = _db.PlayerHistory
+                            .Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-1))
+                            .OrderByDescending(x => x.Created)
+                            .FirstOrDefault();
+                        PlayerHistory playerHistory7 = _db.PlayerHistory
+                            .Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-3))
+                            .OrderByDescending(x => x.Created)
+                            .FirstOrDefault();
+                        PlayerHistory playerHistory30 = _db.PlayerHistory
+                            .Where(x => x.PlayerId == player.Id && x.WorldId == _world.Id && x.Created < DateTime.Today.AddDays(-7))
+                            .OrderByDescending(x => x.Created)
+                            .FirstOrDefault();
+                        //Weryfikacja istnienia historii 
                         if (playerHistory != null)
                         {
+                            //Utworzenie instancji objektu Current z umieszczeniem właściwości z wpisów history
                             currentPlayers.Add(new PlayerCurrent()
                             {
                                 PlayerId = player.Id,
@@ -81,11 +96,15 @@ namespace CoreApi.Tasks
                         scope.Error(e.ToString());
                     }
                 });
-                scope.Debug($"Mapped {_players.Count} Players");
+                scope.Debug($"Mapped {_players.Count} Players"); //Zakończenie mapowania podmiotów na obiekty current
 
+                //Rozpoczęcie zapisu do bazy danych
                 for (int i = 0; i < currentPlayers.Count; i++)
                 {
-                    PlayerCurrent player = _db.PlayerCurrents.FirstOrDefault(x => x.PlayerId == currentPlayers[i].PlayerId && x.WorldId == currentPlayers[i].WorldId);
+                    //Próba pobrania aktualnego obiektu current na podstawie identyfikatora
+                    PlayerCurrent player = _db.PlayerCurrents
+                        .FirstOrDefault(x => x.PlayerId == currentPlayers[i].PlayerId && x.WorldId == currentPlayers[i].WorldId);
+                    //Aktualizacja w przypadku istnienia wpisu w bazie danych
                     if (player != null)
                     {
                         player.TribeId = currentPlayers[i].TribeId;
@@ -116,9 +135,11 @@ namespace CoreApi.Tasks
                     }
                     else
                     {
+                        //Utworzenie nowego obiektu w przypadku braku odpowiednika
                         _db.PlayerCurrents.Add(currentPlayers[i]);
                     }
                 }
+                //Zapis aktualizacji w bazie danych
                 _db.SaveChanges();
                 scope.Debug($"Updated {_players.Count} Players");
             }

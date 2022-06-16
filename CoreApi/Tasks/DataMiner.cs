@@ -27,7 +27,7 @@ namespace CoreApi.Tasks
 
         public void Process()
         {
-            using (MonitoredScope scope = new MonitoredScope("Miner", _logger))
+            using (MonitoredScope scope = new MonitoredScope("Miner", _logger)) //Rozpoczęcie monitorowania czasu wykonywania funkcji Process
             {
                 List<World> worlds = _db.World.Where(x => x.IsActive == true).ToList();
                 List<Thread> threads = new List<Thread>();
@@ -46,10 +46,10 @@ namespace CoreApi.Tasks
 
                 threads.ForEach(thread => thread.Join());
 
-                scope.Debug("Threads Joined");
+                scope.Debug("Threads Joined"); // Wpis informujący ile czasu upłynęło od rozpoczęcia działania bloku
 
                 new RebuildDbCache().Process();
-            }
+            }// opuszczenie bloku using wymusza uruchomienie destruktora MonitoredScope i umieszczenia informacji i czasie wykonania bloku
         }
     }
 }

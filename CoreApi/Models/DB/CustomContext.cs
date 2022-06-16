@@ -53,8 +53,6 @@ namespace CoreApi.Models.DB
             {
                 optionsBuilder.UseSqlServer(ContextOf(ConnectionStrings.AzureDatabase)[0], opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(2).TotalSeconds));
             }
-
-
             return new CustomContext(optionsBuilder.Options);
         }
 
@@ -63,11 +61,11 @@ namespace CoreApi.Models.DB
             switch (value)
             {
                 case ConnectionStrings.AzureDatabase:
-                    return new[] { "#" };
+                    return new[] { "" };
                 case ConnectionStrings.LocalDatabase:
-                    return new[] { @"#" };
+                    return new[] { @"" };
                 case ConnectionStrings.LocalHangfireDatabase:
-                    return new[] { @"#" };
+                    return new[] { @"" };
                 default:
                     return new[] { "" };
             }
